@@ -37,7 +37,7 @@ export default function Home() {
   React.useEffect(() => {
     // api call
     console.log(selectedChapter, selected_shlok);
-    let url = `https://bhagavadgitaapi.in/slok/${selectedChapter}/${selected_shlok}`;
+    let url = `https://bhagavadgitaapi.in/slok/${selectedChapter}/${selected_shlok}/`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => set_shlok_data(data))
@@ -124,13 +124,13 @@ export default function Home() {
           <p>{shlok_data?.chinmay?.hc}</p>
         </div>
       </div>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center m-10">
       <div className="btn-group btn-group-vertical lg:btn-group-horizontal">
-        <button onClick={PrevShlok} className="btn btn-active">
+        <button onClick={PrevShlok} className="btn btn-outline">
           PREVIOUS
         </button>
 
-        <button onClick={NextShlok} className="btn">
+        <button onClick={NextShlok} className="btn btn-outline">
           NEXT
         </button>
       </div>
