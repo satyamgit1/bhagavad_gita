@@ -61,9 +61,19 @@ export default function Home() {
   }, [noofslokens]);
 
   const NextShlok = () => {
-    console.log(selected_shlok, "NextShlok");
+    console.log(selected_shlok, noofslokens);
+    
     if (selected_shlok < noofslokens) {
       setselected_shlok(parseInt(selected_shlok) + 1);
+    } else {
+      // console.log("next chapter")
+      if (selectedChapter<18){
+
+        setselectedChapter(parseInt(selectedChapter) + 1);
+        setverses(parseInt(selectedChapter) + 1);
+
+        setselected_shlok(1)
+      }
     }
   };
 
