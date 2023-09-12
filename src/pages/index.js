@@ -9,6 +9,8 @@ export default function Home() {
   const [selectedChapter, setselectedChapter] = useState(1);
   const [selected_shlok, setselected_shlok] = useState(1);
   const [noofslokens, setnoofslokens] = useState(47);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [range, setrange] = useState([]);
   const [shlok_data, set_shlok_data] = useState();
   React.useEffect(() => {
@@ -44,6 +46,7 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, [selected_shlok]);
 
+  // set  no of slokas for given chapter 
   function setverses(current) {
     chapters.map((chapter, index) => {
       if (current == chapter.chapter_number) {
@@ -69,23 +72,31 @@ export default function Home() {
       // console.log("next chapter")
       if (selectedChapter<18){
 
-        setselectedChapter(parseInt(selectedChapter) + 1);
         setverses(parseInt(selectedChapter) + 1);
+        setselectedChapter(parseInt(selectedChapter) + 1);
+        
 
         setselected_shlok(1)
       }
     }
   };
-
   const PrevShlok = () => {
     console.log(selected_shlok, "PrevShlok");
     if (selected_shlok > 1) {
       setselected_shlok(parseInt(selected_shlok) - 1);
+    } else {
+      if (selectedChapter > 1) {
+        // Decrease the chapter number
+        setselectedChapter(parseInt(selectedChapter) - 1);
+        
+        setselected_shlok(parseInt(setnoofslokens));
+
+      }
     }
   };
 
   return (
-    <div>
+    <div data-theme="luxury">
       <Navbar />
 
       <br />
