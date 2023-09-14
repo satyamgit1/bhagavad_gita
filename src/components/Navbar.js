@@ -33,7 +33,7 @@ function Navbar() {
   </div>
   <div className="navbar-end">
   <ul className="menu menu-horizontal px-1">
-      <li><a href="/about_us">About us</a></li>
+      <li><Link href="/about_us">About us</Link></li>
       <li><a>Contact us</a></li>
       <li><a></a></li>
     </ul> 
