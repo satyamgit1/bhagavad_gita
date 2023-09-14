@@ -48,12 +48,13 @@ export default function Home() {
 
   // set  no of slokas for given chapter 
   function setverses(current) {
-    chapters.map((chapter, index) => {
+    for (let chapter of chapters){
       if (current == chapter.chapter_number) {
         console.log(chapter.verses_count);
         setnoofslokens(chapter.verses_count);
+        return (chapter.verses_count);
       }
-    });
+    };
   }
 
   const shlok_options = [];
@@ -88,18 +89,23 @@ export default function Home() {
       if (selectedChapter > 1) {
         // Decrease the chapter number
         setselectedChapter(parseInt(selectedChapter) - 1);
-        
-        setselected_shlok(parseInt(setnoofslokens));
+
+        let c = setverses(parseInt(selectedChapter) - 1);
+        setselected_shlok(c)
+  
+        // setselected_shlok(parseInt(setnoofslokens));
 
       }
     }
   };
 
   return (
-    <div data-theme="luxury">
+    <div>
       <Navbar />
 
       <br />
+
+    
 
       <div className="flex md:container justify-center">
         <div className="form-control mr-4 w-full max-w-xs">
@@ -119,9 +125,9 @@ export default function Home() {
           </select>
         </div>
 
-        <div className="form-control w-full max-w-xs">
+        <div  className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Pick the Shlok</span>
+            <span   className="label-text"> Pick the Shlok</span>
           </label>
           <select
             value={selected_shlok}
@@ -145,17 +151,18 @@ export default function Home() {
           <p>{shlok_data?.chinmay?.hc}</p>
         </div>
       </div>
-      <div className="flex justify-center items-center m-10">
+      <div className="flex justify-center items-center m-10 ">
       <div className="btn-group btn-group-vertical lg:btn-group-horizontal">
         <button onClick={PrevShlok} className="btn btn-outline">
-          PREVIOUS
+          PREVIOUS PAGE
         </button>
 
-        <button onClick={NextShlok} className="btn btn-outline">
-          NEXT
+        <button  onClick={NextShlok} className="btn btn-outline mr-auto">
+          NEXT PAGE
         </button>
       </div>
       </div>
+      
       
 
       <br />
