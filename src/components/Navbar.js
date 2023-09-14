@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
 
 
 
@@ -22,7 +23,9 @@ function Navbar() {
     </div>
     
     {/* <a className="btn btn-ghost normal-case text-xl">Bhagavad gita</a> */}
-    <img src="/logo.png" alt ="logo" className="h-16 w-16"/>
+    <Link href="/"> <img src="/logo.png" alt="logo" className="h-16 w-16" /></Link>
+  
+
 
   </div>
   <div className="navbar-center hidden lg:flex">
@@ -30,7 +33,7 @@ function Navbar() {
   </div>
   <div className="navbar-end">
   <ul className="menu menu-horizontal px-1">
-      <li><a>About us</a></li>
+      <li><a href="/about_us">About us</a></li>
       <li><a>Contact us</a></li>
       <li><a></a></li>
     </ul> 
