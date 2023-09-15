@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@media (max-width: 767px) {
+    .navbar-end ul.menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar-end ul.menu li {
+        margin-bottom: 10px; /* Adjust spacing between items if needed */
+    }
+}

@@ -28,16 +28,21 @@ function Navbar() {
 
 
   </div>
-  <div className="navbar-center hidden lg:flex">
+  <div className="navbar-center lg:flex">
     
   </div>
-  <div className="navbar-end">
-  <ul className="menu menu-horizontal px-1">
+  <div className="navbar-end hidden lg:flex">
+  <ul className="menu menu-horizontal px-1 ">
       <li><Link href="/about_us">About us</Link></li>
       <li><a>Contact us</a></li>
-      <li><a></a></li>
     </ul> 
-    <select
+    <div>
+
+    </div>
+ 
+  </div>
+  <div className="navbar-end ">
+  <select
 value={theme}
 onChange={(e) => setTheme(e.target.value)}
 className="select select-bordered"

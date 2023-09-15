@@ -104,9 +104,6 @@ export default function Home() {
       <Navbar />
 
       <br />
-
-    
-
       <div className="flex md:container justify-center">
         <div className="form-control mr-4 w-full max-w-xs">
           <label className="label">
