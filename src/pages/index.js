@@ -3,6 +3,8 @@ import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
 import React from "react";
 import { useState } from "react";
+import Landing from "@/components/Landing";
+
 
 export default function Home() {
   const [chapters, setchapters] = useState([]);
@@ -102,8 +104,10 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-
       <br />
+     
+     <Landing />
+   <div id="shlok">
       <div className="flex md:container justify-center">
         <div className="form-control mr-4 w-full max-w-xs">
           <label className="label">
@@ -164,6 +168,7 @@ export default function Home() {
 
       <br />
       <Footer />
+    </div>
     </div>
   );
 }

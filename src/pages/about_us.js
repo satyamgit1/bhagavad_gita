@@ -31,7 +31,7 @@ function About_us() {
               striving for growth, I am well-versed in the latest software
               development methodologies like Service-now develop
             </p>
-            <button className="btn btn-primary">Join us</button>
+            <button className="btn btn-primary  ">Join us</button>
           </div>
         </div>
       </div>
@@ -52,14 +52,14 @@ function About_us() {
             </p>
 
             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
-              <div class="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 dark:border-gray-700 dark:hover:border-transparent">
+              <div class="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-yellow-600 dark:border-gray-700 dark:hover:border-transparent">
                 <img
                   class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
                   src="/my_pic.png"
                   alt=""
                 />
 
-                <h1 class="mt-4 text-2xl font-semibold text-gray-700 capitalize group-hover:text-white">
+                <h1 class="mt-4 text-2xl font-semibold text-white-700 capitalize group-hover:text-white">
                   Satyam
                 </h1>
 
@@ -115,7 +115,7 @@ function About_us() {
                 </div>
               </div>
 
-              <div class="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 dark:border-gray-700 dark:hover:border-transparent">
+              <div class="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-yellow-600 dark:border-gray-700 dark:hover:border-transparent">
                 <img
                   class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
                   src="/sir.png"
