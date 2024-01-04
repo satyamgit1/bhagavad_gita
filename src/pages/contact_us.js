@@ -140,7 +140,7 @@ function contact() {
                 <div class="flex mt-4 -mx-1.5 ">
                   <a
                     class="mx-1.5 dark:hover:text-blue-400 transition-colors duration-300 transform hover:text-blue-500"
-                    href="#"
+                    href="https://twitter.com/SatyamS73287404"
                   >
                     <svg
                       class="w-10 h-10 fill-current"
