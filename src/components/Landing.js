@@ -1,14 +1,19 @@
 // components/landing.js
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 
 export default function Landing() {
   const router = useRouter();
+  const modalRef = useRef(null);
 
   const handleBeginNewLife = () => {
     router.push("#shlok");
+  };
+
+  const closeModal = () => {
+    modalRef.current.close();
   };
 
   return (
@@ -24,7 +29,7 @@ export default function Landing() {
               triggerOnce={true}
             >
               <h1 className="text-4xl lg:text-7xl font-semibold mb-5 text-lightgrey md:4px lg:text-start text-center">
-              श्रीमद भगवद गीता
+                श्रीमद भगवद गीता
               </h1>
             </Fade>
             <Fade
@@ -52,6 +57,50 @@ export default function Landing() {
                   onClick={handleBeginNewLife}
                 >
                   Begin New Life
+                </div>
+
+                <div>
+
+                <div
+                  className="flex border w-full md:w-auto mt-5 md:mt-0 border-pink justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink hover:text-white hover:bg-pink"
+                  onClick={() => modalRef.current.showModal()}
+                >
+                  Talk to Krishna
+                </div>
+
+
+                  {/* Open the modal using document.getElementById('ID').showModal() method */}
+                 
+                  <dialog
+                    ref={modalRef}
+                    id="my_modal_4"
+                    className="modal"
+                    onClick={(e) => {
+                      if (e.target === modalRef.current) {
+                        closeModal();
+                      }
+                    }}
+                  >
+                    <div className="modal-box w-11/12 max-w-5xl">
+                      <iframe
+                        src="https://gitagpt.org/#"
+                        frameBorder="0"
+                        width="1000"
+                        height="600"
+                      ></iframe>
+                      <div className="modal-action modal-backdrop">
+                        <form method="dialog">
+                          {/* If there is a button, it will close the modal */}
+                          <button
+                            className="flex border w-full md:w-auto mt-5 md:mt-0 border-black justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-black hover:text-black"
+                            onClick={closeModal}
+                          >
+                            Close
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
                 </div>
               </div>
             </Fade>
