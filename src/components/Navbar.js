@@ -30,11 +30,11 @@ function Navbar() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-            <Link href="/about_us">About us</Link>
+              <Link href="/about_us">About us</Link>
             </li>
 
             <li>
-            <Link href="/contact_us">Contact us</Link>
+              <Link href="/contact_us">Contact us</Link>
             </li>
           </ul>
         </div>
@@ -45,31 +45,31 @@ function Navbar() {
           <img src="/logo.png" alt="logo" className="h-16 w-16" />
         </Link>
       </div>
-      <div className="navbar-center lg:flex"></div>
-      <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 ">
+      <div className="navbar"></div>
+
+      <div className="navbar-end  ">
+        <ul className="menu menu-horizontal px-1 flex items-center justify-between">
           <li>
             <Link href="/about_us">About us</Link>
           </li>
           <li>
-          <Link href="/contact_us">Contact us</Link>
+            <Link href="/contact_us">Contact us</Link>
+          </li>
+          <li>
+            <select
+              value={theme}
+              onChange={(e) => setTheme(e.target.value)}
+              className="select select-bordered"
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="cyberpunk">Cyberpunk</option>
+              <option value="halloween">Halloween</option>
+              <option value="valentine">valentine</option>
+              <option value="winter">winter</option>
+            </select>
           </li>
         </ul>
-        <div></div>
-      </div>
-      <div className="navbar-end  ">
-        <select
-          value={theme}
-          onChange={(e) => setTheme(e.target.value)}
-          className="select select-bordered"
-        >
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="cyberpunk">Cyberpunk</option>
-          <option value="halloween">Halloween</option>
-          <option value="valentine">valentine</option>
-          <option value="winter">winter</option>
-        </select>
       </div>
     </div>
   );
