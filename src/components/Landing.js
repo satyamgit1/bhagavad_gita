@@ -17,7 +17,7 @@ export default function Landing() {
   };
 
   return (
-    <div id="" className="bg-lightpink">
+    <div id="" className="bg-lightpink p-9">
       <div className="mx-auto max-w-7xl pt-20 sm:pb-24 px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 space-x-1">
           <div className="col-span-6 flex flex-col justify-center">

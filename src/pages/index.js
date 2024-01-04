@@ -105,7 +105,6 @@ export default function Home() {
     <div>
       <Navbar />
       <br />
-      
      
      <Landing />
    <div id="shlok">
@@ -146,9 +145,9 @@ export default function Home() {
       </div>
 
       <br />
-
+      
       <div className="container">
-        <div className="prose text-center m-auto">
+        <div className="prose text-center m-auto max-h-48 p-8 overflow-y-auto">
           <h2>{shlok_data?.slok}</h2>
           <p>{shlok_data?.chinmay?.hc}</p>
         </div>
