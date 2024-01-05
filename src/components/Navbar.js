@@ -36,6 +36,9 @@ function Navbar() {
             <li>
               <Link href="/contact_us">Contact us</Link>
             </li>
+            <li>
+              <Link href="/contact_us">Audio Book</Link>
+            </li>
           </ul>
         </div>
 
@@ -56,6 +59,9 @@ function Navbar() {
             <Link href="/contact_us">Contact us</Link>
           </li>
           <li>
+              <Link href="/audiobook">Audio Book</Link>
+            </li>
+          <li>
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
@@ -67,6 +73,13 @@ function Navbar() {
               <option value="halloween">Halloween</option>
               <option value="valentine">valentine</option>
               <option value="winter">winter</option>
+              <option value="aqua">aqua</option>
+              <option value="retro">retro</option>
+              <option value="luxury">luxury</option>
+              <option value="black">black</option>
+              <option value="dim">dim</option>
+
+
             </select>
           </li>
         </ul>
