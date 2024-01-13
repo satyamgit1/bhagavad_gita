@@ -35,7 +35,7 @@ function contact() {
                       type="email"
                       placeholder="Enter your email address"
                       name="email"
-                      className="block w-full px-5 py-3 mt-2   bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900  dark:border-gray-700 focus:border-blue-400 dark:focus:border-b"
+                      className="block w-full px-5 py-3 mt-2  text-gray-700 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900  dark:border-gray-700 focus:border-blue-400 dark:focus:border-b"
                       required
                     />
                   </div>
@@ -91,7 +91,7 @@ function contact() {
                   </svg>
 
                   <span class="mx-2 ">
-                    Vrindavan, Barsana, Govardhan, Mathura, Dwarka and Bhalka
+                  Mumbai , Naigaon
                   </span>
                 </p>
 
