@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
@@ -37,20 +37,17 @@ function Navbar() {
               <Link href="/contact_us">Contact us</Link>
             </li>
             <li>
-              <Link href="/contact_us">Audio Book</Link>
+              <Link href="/audiobook">Audio Book</Link>
             </li>
           </ul>
         </div>
-
-        {/* <a className="btn btn-ghost normal-case text-xl">Bhagavad gita</a> */}
         <Link href="/">
           {" "}
           <img src="/logo.png" alt="logo" className="h-16 w-16" />
         </Link>
       </div>
-      <div className="navbar"></div>
 
-      <div className="navbar-end  ">
+      <div className="navbar-end hidden lg:flex ">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
           <li>
             <Link href="/about_us">About us</Link>
@@ -59,28 +56,27 @@ function Navbar() {
             <Link href="/contact_us">Contact us</Link>
           </li>
           <li>
-              <Link href="/audiobook">Audio Book</Link>
-            </li>
+            <Link href="/audiobook">Audio Book</Link>
+          </li>
           <li>
-            <select
-              value={theme}
-              onChange={(e) => setTheme(e.target.value)}
-              className="select select-bordered"
-            >
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="cyberpunk">Cyberpunk</option>
-              <option value="halloween">Halloween</option>
-              <option value="valentine">valentine</option>
-              <option value="winter">winter</option>
-              <option value="aqua">aqua</option>
-              <option value="retro">retro</option>
-              <option value="luxury">luxury</option>
-              <option value="black">black</option>
-              <option value="dim">dim</option>
+          <select
+  value={theme}
+  onChange={(e) => setTheme(e.target.value)}
+  className="select select-bordered"
+>
+  <option value="light">Light</option>
+  <option value="dark">Dark</option>
+  <option value="cyberpunk">Cyberpunk</option>
+  <option value="halloween">Halloween</option>
+  <option value="valentine">Valentine</option>
+  <option value="winter">Winter</option>
+  <option value="aqua">Aqua</option>
+  <option value="retro">Retro</option>
+  <option value="luxury">Luxury</option>
+  <option value="black">Black</option>
+  <option value="dim">Dim</option>
+</select>
 
-
-            </select>
           </li>
         </ul>
       </div>
