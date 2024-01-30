@@ -81,19 +81,16 @@ export default function Landing() {
     }
   }}
 >
-  <div className="modal-box w-11/12 max-w-5xl mx-auto">
+  <div className="modal-box">
     <iframe
       src="https://gitagpt.org/#"
       frameBorder="0"
-      width="100%"
-      height="700"  // Adjust the height as needed
-      className="responsive-iframe" // Add a class for responsive iframes
+      className="custom-iframe"
     ></iframe>
     <div className="modal-action modal-backdrop">
       <form method="dialog">
-        {/* If there is a button, it will close the modal */}
         <button
-          className="flex border w-full md:w-auto mt-5 md:mt-0 border-black justify-center rounded-full text-xl font-medium items-center py-3 md:py-5 px-5 md:px-10 text-black hover:text-black"
+          className="custom-button"
           onClick={closeModal}
         >
           Close
@@ -102,6 +99,8 @@ export default function Landing() {
     </div>
   </div>
 </dialog>
+
+
 
                 </div>
               </div>
