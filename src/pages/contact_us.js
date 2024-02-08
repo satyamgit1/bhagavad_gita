@@ -1,65 +1,140 @@
-import Navbar from "@/components/Navbar";
 import React from "react";
+import { useState } from "react";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { myFetch } from "@/utils/myFetch";
 
-function contact() {
+function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false); // New state for loading
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let url = `/api/contact`;
+    // Call your backend API here
+    try {
+      setSubmitting(true); // Start loading
+
+      let data = await myFetch(url, "POST", formData);
+      console.log("Successful:", data);
+      setSubmitSuccess(true);
+
+      //   const response = await fetch(url, {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(formData),
+      //   });
+
+      //   const data = await response.json();
+      //   console.log(data); // Assuming your API returns a message
+
+      // Handle success message display or other logic
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // Handle error state or display error message
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div>
       <div>
         <Navbar />
       </div>
-      <section class="min-h-screen">
-        <div class="container px-6 py-10 mx-auto">
-          <div class="lg:flex lg:items-center lg:-mx-10">
-            <div class="lg:w-1/2 lg:mx-10">
-              <h1 class="text-2xl font-semibold lg:text-3xl">Let’s talk</h1>
+      <section className="min-h-screen">
+        <div className="px-6 py-10 mx-auto">
+          <div className="lg:flex">
+            {!submitSuccess && (
+              <div className="lg:w-2/3 lg:mx-10">
+                <h1 className="text-2xl font-semibold lg:text-3xl">
+                  Lets talk
+                </h1>
 
-              <p class="mt-4 ">
-                Ask us everything and we would love to hear from you
-              </p>
+                <p className="mt-4 ">
+                  Ask us everything and we would love to hear from you
+                </p>
 
-              <form
-                action="https://formspree.io/f/mqkrkykk"
-                method="POST"
-                class="mt-12"
-              >
-                <div class="-mx-2 md:items-center md:flex">
-                  {/* <div class="flex-1 px-2">
-                            <label class="block mb-2 text-sm ">Full Name</label>
-                            <input type="text" placeholder="Krishna"  class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                        </div> */}
-
-                  <div class="flex-1 px-2 mt-4 md:mt-0">
-                    <label class="block mb-2 text-sm">Email address</label>
+                <form className="mt-12" onSubmit={handleSubmit}>
+                  <div className="">
+                    <label className="block mb-2 text-sm "> Name</label>
                     <input
-                      type="email"
-                      placeholder="Enter your email address"
-                      name="email"
-                      className="block w-full px-5 py-3 mt-2  text-gray-700 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900  dark:border-gray-700 focus:border-blue-400 dark:focus:border-b"
+                      type="text"
                       required
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder=""
+                      className="block w-full px-5 py-3 mt-2 input input-bordered"
                     />
                   </div>
-                </div>
 
-                <div class="w-full mt-4 ">
-                  <label class="block mb-2 text-sm">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                    placeholder="Message"
-                    required
-                  ></textarea>{" "}
-                </div>
+                  <div className="mt-4">
+                    <label className="block mb-2 text-sm">Email address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder=""
+                      className="block w-full px-5 py-3 mt-2 input input-bordered"
+                    />
+                  </div>
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Mobile</label>
+                    <input
+                      type="text"
+                      required
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      placeholder=""
+                      className="block w-full px-5 py-3 mt-2 input input-bordered"
+                    />
+                  </div>
 
-                <button
-                  type="submit"
-                  class="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                >
-                  get in touch
-                </button>
-              </form>
-            </div>
+                  <div className="mt-4">
+                    <label className="block text-sm">Message</label>
+                    <textarea
+                      name="message"
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full h-32 px-5 py-3 mt-2 input input-bordered"
+                      placeholder="Message"
+                    ></textarea>
+
+                    {!submitting && <input type="submit" className="btn" />}
+
+                    {submitting && (
+                      <button className="btn px-6 py-3 mt-4">
+                        <span className="loading loading-spinner"></span>
+                        Submitting
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {submitSuccess && (
+              <div className="lg:w-2/3 lg:mx-10">
+                <p className="mt-4 ">
+                  <h3>Thank you.. Our Team will contact you soon.</h3>
+                </p>
+              </div>
+            )}
 
             <div class="mt-12 lg:flex lg:mt-0 lg:flex-col lg:items-center lg:w-1/2 lg:mx-10">
               <img
@@ -90,9 +165,7 @@ function contact() {
                     />
                   </svg>
 
-                  <span class="mx-2 ">
-                  Mumbai , Naigaon
-                  </span>
+                  <span class="mx-2 ">Mumbai , Naigaon</span>
                 </p>
 
                 <p class="flex items-start -mx-2">
@@ -222,4 +295,4 @@ function contact() {
     </div>
   );
 }
-export default contact;
+export default Contact;
