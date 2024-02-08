@@ -46,9 +46,7 @@ function About_us() {
             </h1>
 
             <p class="max-w-2xl mx-auto my-6 text-center ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-              incidunt ex placeat modi magni quia error alias, adipisci rem
-              similique, at omnis eligendi optio eos harum.
+            As a recent college graduate eager to embark on a rewarding career journey, I am passionate about learning and honing my skills as a Full Stack Developer. Armed with a solid academic foundation and a hunger for new challenges, I am committed to staying abreast of industry trends and technologies. My goal is to contribute meaningfully to a dynamic team, leveraging my adaptability and dedication to continuous improvement. I am excited about the opportunity to apply my fresh perspective and foundational knowledge to real-world projects, making a positive impact and evolving into a proficient Full Stack Developer.
             </p>
 
             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
