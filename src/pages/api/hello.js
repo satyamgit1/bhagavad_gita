@@ -1,13 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import connectDB from "@/utils/db"
-// const authRoutes = require('./routes/auth.routes');
+import connectDB from "@/utils/db";
+import authRoutes from "./routes/auth.routes";
 
 connectDB();
 
-
-app.use('/api/auth', authRoutes);
-
 export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+  // Here you can handle different HTTP methods like GET, POST, etc.
+  // For now, let's just send a JSON response with a sample data
+  res.status(200).json({ name: 'John Doe' });
 }
