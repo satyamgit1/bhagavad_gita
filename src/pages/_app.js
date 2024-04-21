@@ -1,12 +1,18 @@
-import '@/styles/globals.css'
-import { ThemeProvider } from 'next-themes'
-
+import { Analytics } from "@vercel/analytics/react";
+import '@/styles/globals.css'; // Import global styles
+import { ThemeProvider } from 'next-themes';
+import { useEffect } from 'react'; // Import useEffect hook if needed
 
 export default function App({ Component, pageProps }) {
-  return (
-  <ThemeProvider>
+  // Use useEffect to initialize analytics
+  useEffect(() => {
+    const analytics = Analytics();
+    analytics.page();
+  }, []);
 
-  <Component {...pageProps} />
-</ThemeProvider>
-  )
+  return (
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }

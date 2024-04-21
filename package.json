@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",
-    "@vercel/analytics": "^1.1.1",
+    "@vercel/analytics": "^1.2.2",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "fade": "^0.2.0",
