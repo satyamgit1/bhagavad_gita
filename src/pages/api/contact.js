@@ -4,8 +4,6 @@ import nodemailer from "nodemailer";
 
 connectDB();
 
-connectDB();
-
 // Create a Contact Us schema
 const contactUsSchema = new mongoose.Schema({
   name: String,
@@ -48,7 +46,66 @@ export default async function handler(req, res) {
           from: process.env.EMAIL_USER,
           to: process.env.DESTINATION_EMAIL,
           subject: "New Contact Form Submission",
-          text: `Name: ${name}\nEmail: ${email}\nMobile: ${mobile}\nMessage: ${message}`,
+          html: `
+            <style>
+              .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-family: Arial, sans-serif;
+              }
+              .header {
+                background-color: #007bff;
+                color: #fff;
+                text-align: center;
+                padding: 10px;
+                border-radius: 5px 5px 0 0;
+              }
+              .table-container {
+                margin-top: 20px;
+              }
+              .table {
+                width: 100%;
+                border-collapse: collapse;
+              }
+              .table th,
+              .table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+              }
+              .table th {
+                background-color: #f2f2f2;
+              }
+            </style>
+            <div class="container">
+              <div class="header">
+                <h1>New Contact Form Submission</h1>
+              </div>
+              <div class="table-container">
+                <table class="table">
+                  <tr>
+                    <th>Name</th>
+                    <td>${name}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>${email}</td>
+                  </tr>
+                  <tr>
+                    <th>Mobile</th>
+                    <td>${mobile}</td>
+                  </tr>
+                  <tr>
+                    <th>Message</th>
+                    <td>${message}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          `,
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
