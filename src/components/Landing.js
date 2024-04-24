@@ -17,7 +17,7 @@ export default function Landing() {
   };
 
   return (
-    <div id="" className="bg-lightpink p-9">
+    <div id="" className="bg-lightpink p-9 ">
       <div className="mx-auto max-w-7xl pt-20 sm:pb-24 px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 space-x-1">
           <div className="col-span-6 flex flex-col justify-center">
@@ -60,48 +60,43 @@ export default function Landing() {
                 </div>
 
                 <div>
-
-                <div
-                  className="flex border w-full md:w-auto mt-5 md:mt-0 border-pink justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink cursor-pointer  "
-                  onClick={() => modalRef.current.showModal()}
-                >
-                  Talk to Krishna
-                </div>
-
+                  <div
+                    className="flex border w-full md:w-auto mt-5 md:mt-0 border-pink justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink cursor-pointer  "
+                    onClick={() => modalRef.current.showModal()}
+                  >
+                    Talk to Krishna
+                  </div>
 
                   {/* Open the modal using document.getElementById('ID').showModal() method */}
-                 
+
                   <dialog
-  ref={modalRef}
-  id="my_modal_4"
-  className="modal"
-  onClick={(e) => {
-    if (e.target === modalRef.current) {
-      closeModal();
-    }
-  }}
->
-  <div className="modal-box">
-    <iframe
-      src="https://gitagpt.org/#"
-      frameBorder="0"
-      className="custom-iframe"
-    ></iframe>
-    <div className="modal-action modal-backdrop">
-      <form method="dialog">
-        <button
-          className="custom-button"
-          onClick={closeModal}
-        >
-          Close
-        </button>
-      </form>
-    </div>
-  </div>
-</dialog>
-
-
-
+                    ref={modalRef}
+                    id="my_modal_4"
+                    className="modal"
+                    onClick={(e) => {
+                      if (e.target === modalRef.current) {
+                        closeModal();
+                      }
+                    }}
+                  >
+                    <div className="modal-box">
+                      <iframe
+                        src="https://gitagpt.org/#"
+                        frameBorder="0"
+                        className="custom-iframe"
+                      ></iframe>
+                      <div className="modal-action modal-backdrop">
+                        <form method="dialog">
+                          <button
+                            className="custom-button"
+                            onClick={closeModal}
+                          >
+                            Close
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
                 </div>
               </div>
             </Fade>
@@ -119,5 +114,6 @@ export default function Landing() {
         </div>
       </div>
     </div>
+    
   );
 }

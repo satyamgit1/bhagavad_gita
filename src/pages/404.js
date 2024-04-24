@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Custom404 = () => {
   return (
-    <div className="hero min-h-screen bg-base-100">
+    <div className=" hero min-h-screen bg-base-100 ">
       <div className="hero-content text-center">
         <div className="">
           <h1 className="text-5xl font-bold py-8">

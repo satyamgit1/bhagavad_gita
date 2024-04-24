@@ -5,6 +5,7 @@ import React from "react";
 import { useState } from "react";
 import Landing from "@/components/Landing";
 import Audiobook from "./audiobook";
+import { Accordion } from "@/components/Accordion";
 
 
 export default function Home() {
@@ -168,6 +169,7 @@ export default function Home() {
       
 
       <br />
+      <Accordion />
       <Footer />
     </div>
 
