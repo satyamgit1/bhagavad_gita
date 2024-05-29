@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
@@ -59,7 +61,7 @@ export default function Home() {
       }
     };
   }
-/* eslint-disable react-hooks/exhaustive-deps */
+
 
   React.useEffect(() => {
     console.log(noofslokens, "shlok_options");
