@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import Image from "next/image"; // Import Image component
 
 function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -32,7 +33,6 @@ function Navbar() {
             <li>
               <Link href="/about_us">About us</Link>
             </li>
-
             <li>
               <Link href="/contact_us">Contact us</Link>
             </li>
@@ -42,12 +42,12 @@ function Navbar() {
           </ul>
         </div>
         <Link href="/">
-          {" "}
-          <img src="/logo.png" alt="logo" className="h-16 w-16" />
+          {/* Use Image component instead of img tag */}
+          <Image src="/logo.png" alt="logo" width={64} height={64} />
         </Link>
       </div>
 
-      <div className="navbar-end hidden lg:flex ">
+      <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
           <li>
             <Link href="/about_us">About us</Link>
@@ -59,24 +59,23 @@ function Navbar() {
             <Link href="/audiobook">Audio Book</Link>
           </li>
           <li>
-          <select
-  value={theme}
-  onChange={(e) => setTheme(e.target.value)}
-  className="select select-bordered"
->
-  <option value="light">Light</option>
-  <option value="dark">Dark</option>
-  <option value="cyberpunk">Cyberpunk</option>
-  <option value="halloween">Halloween</option>
-  <option value="valentine">Valentine</option>
-  <option value="winter">Winter</option>
-  <option value="aqua">Aqua</option>
-  <option value="retro">Retro</option>
-  <option value="luxury">Luxury</option>
-  <option value="black">Black</option>
-  <option value="dim">Dim</option>
-</select>
-
+            <select
+              value={theme}
+              onChange={(e) => setTheme(e.target.value)}
+              className="select select-bordered"
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="cyberpunk">Cyberpunk</option>
+              <option value="halloween">Halloween</option>
+              <option value="valentine">Valentine</option>
+              <option value="winter">Winter</option>
+              <option value="aqua">Aqua</option>
+              <option value="retro">Retro</option>
+              <option value="luxury">Luxury</option>
+              <option value="black">Black</option>
+              <option value="dim">Dim</option>
+            </select>
           </li>
         </ul>
       </div>

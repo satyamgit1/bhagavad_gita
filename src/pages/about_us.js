@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import custom from "./custom.module.css";
+import Image from "next/image";
 
 function About_us() {
   const [loading, setLoading] = useState(true);
@@ -31,12 +32,11 @@ function About_us() {
     <div class="panShadow"></div>
   </div>
 </div>
-
       ) : (
         <>
           <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">
-              <img src="/logo.png" className="max-w-sm rounded-lg" alt="Logo" />
+              <Image src="/logo.png" className="max-w-sm rounded-lg" alt="Logo" />
               <div>
                 <h1 className="text-5xl font-bold">About us</h1>
                 <p className="py-6">
@@ -70,7 +70,7 @@ function About_us() {
               </p>
               <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
                 <div className="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-yellow-600 dark:border-gray-700 dark:hover:border-transparent">
-                  <img className="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" src="/my_pic.png" alt="Satyam" />
+                  <Image className="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" src="/my_pic.png" alt="Satyam" />
                   <h1 className="mt-4 text-2xl font-semibold text-white-700 capitalize group-hover:text-white">Satyam</h1>
                   <p className="mt-2 capitalize group-hover:text-gray-300">Software Developer</p>
                   <div className="flex mt-3 -mx-2">
