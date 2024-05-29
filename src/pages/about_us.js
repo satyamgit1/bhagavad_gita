@@ -1,186 +1,109 @@
+import React, { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import React from "react";
+import custom from "./custom.module.css";
 
 function About_us() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay with setTimeout
+    const timeout = setTimeout(() => {
+      setLoading(false); // Set loading to false after 1 second (you can adjust this value)
+    }, 1000); // Adjust the timeout duration as needed
+
+    // Clean up the timeout to prevent memory leaks
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <img src="/logo.png" className="max-w-sm rounded-lg " />
-          <div>
-            <h1 className="text-5xl font-bold">About us</h1>
-            <p className="py-6">
-              As a passionate and dedicated computer science student at Thakur
-              College of Engineering and Technology, I am constantly seeking
-              opportunities to enhance my skills in software development. With
-              expertise in HTML, CSS, JavaScript, Java, React.js, SQL, and DBMS,
-              I have a solid foundation in web development and database
-              management. Driven by a problem-solving mindset, I thrive on using
-              technology to overcome complex challenges and create innovative
-              solutions. Whether working independently or as part of a team, I
-              bring a meticulous attention to detail and a strong ability to
-              identify and resolve issues efficiently. My effective
-              communication skills and collaborative nature enable me to work
-              seamlessly with stakeholders from diverse backgrounds. I have
-              successfully led cross-functional teams, leveraging my skills to
-              exceed expectations and deliver exceptional results. Constantly
-              striving for growth, I am well-versed in the latest software
-              development methodologies like Service-now develop
-            </p>
-            <button className="btn btn-primary  ">Join us</button>
-          </div>
-        </div>
-      </div>
+      <Navbar />
+      {loading ? (
+        
+        <div class="loader center ">
+  <div class="panWrapper">
+    <div class="pan">
+      <div class="food"></div>
+      <div class="panBase"></div>
+      <div class="panHandle"></div>
+    </div>
+    <div class="panShadow"></div>
+  </div>
+</div>
 
-      {/* My Team section */}
-
-      <div>
-        <section class="">
-          <div class="container px-6 py-10 mx-auto">
-            <h1 class="text-2xl font-semibold text-center  capitalize lg:text-3xl ">
-              Our Executive Team
-            </h1>
-
-            <p class="max-w-2xl mx-auto my-6 text-center ">
-            As a recent college graduate eager to embark on a rewarding career journey, I am passionate about learning and honing my skills as a Full Stack Developer. Armed with a solid academic foundation and a hunger for new challenges, I am committed to staying abreast of industry trends and technologies. My goal is to contribute meaningfully to a dynamic team, leveraging my adaptability and dedication to continuous improvement. I am excited about the opportunity to apply my fresh perspective and foundational knowledge to real-world projects, making a positive impact and evolving into a proficient Full Stack Developer.
-            </p>
-
-            <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
-              <div class="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-yellow-600 dark:border-gray-700 dark:hover:border-transparent">
-                <img
-                  class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
-                  src="/my_pic.png"
-                  alt=""
-                />
-
-                <h1 class="mt-4 text-2xl font-semibold text-white-700 capitalize group-hover:text-white">
-                  Satyam
-                </h1>
-
-                <p class="mt-2  capitalize group-hover:text-gray-300">
-                  Software Developer
+      ) : (
+        <>
+          <div className="hero min-h-screen bg-base-200">
+            <div className="hero-content flex-col lg:flex-row">
+              <img src="/logo.png" className="max-w-sm rounded-lg" alt="Logo" />
+              <div>
+                <h1 className="text-5xl font-bold">About us</h1>
+                <p className="py-6">
+                  As a passionate and dedicated computer science student at Thakur College of Engineering and Technology,
+                  I am constantly seeking opportunities to enhance my skills in software development. With expertise in
+                  HTML, CSS, JavaScript, Java, React.js, SQL, and DBMS, I have a solid foundation in web development and
+                  database management. Driven by a problem-solving mindset, I thrive on using technology to overcome
+                  complex challenges and create innovative solutions. Whether working independently or as part of a team,
+                  I bring meticulous attention to detail and a strong ability to identify and resolve issues efficiently.
+                  My effective communication skills and collaborative nature enable me to work seamlessly with stakeholders
+                  from diverse backgrounds. I have successfully led cross-functional teams, leveraging my skills to exceed
+                  expectations and deliver exceptional results. Constantly striving for growth, I am well-versed in the
+                  latest software development methodologies like Service-now develop.
                 </p>
-
-                <div class="flex mt-3 -mx-2">
-                  <a
-                    href="#"
-                    class="mx-2  hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white"
-                    aria-label="Reddit"
-                  >
-                    <svg
-                      class="w-6 h-6 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM6.807 10.543C6.20862 10.5433 5.67102 10.9088 5.45054 11.465C5.23006 12.0213 5.37133 12.6558 5.807 13.066C5.92217 13.1751 6.05463 13.2643 6.199 13.33C6.18644 13.4761 6.18644 13.6229 6.199 13.769C6.199 16.009 8.814 17.831 12.028 17.831C15.242 17.831 17.858 16.009 17.858 13.769C17.8696 13.6229 17.8696 13.4761 17.858 13.33C18.4649 13.0351 18.786 12.3585 18.6305 11.7019C18.475 11.0453 17.8847 10.5844 17.21 10.593H17.157C16.7988 10.6062 16.458 10.7512 16.2 11C15.0625 10.2265 13.7252 9.79927 12.35 9.77L13 6.65L15.138 7.1C15.1931 7.60706 15.621 7.99141 16.131 7.992C16.1674 7.99196 16.2038 7.98995 16.24 7.986C16.7702 7.93278 17.1655 7.47314 17.1389 6.94094C17.1122 6.40873 16.6729 5.991 16.14 5.991C16.1022 5.99191 16.0645 5.99491 16.027 6C15.71 6.03367 15.4281 6.21641 15.268 6.492L12.82 6C12.7983 5.99535 12.7762 5.993 12.754 5.993C12.6094 5.99472 12.4851 6.09583 12.454 6.237L11.706 9.71C10.3138 9.7297 8.95795 10.157 7.806 10.939C7.53601 10.6839 7.17843 10.5422 6.807 10.543ZM12.18 16.524C12.124 16.524 12.067 16.524 12.011 16.524C11.955 16.524 11.898 16.524 11.842 16.524C11.0121 16.5208 10.2054 16.2497 9.542 15.751C9.49626 15.6958 9.47445 15.6246 9.4814 15.5533C9.48834 15.482 9.52348 15.4163 9.579 15.371C9.62737 15.3318 9.68771 15.3102 9.75 15.31C9.81233 15.31 9.87275 15.3315 9.921 15.371C10.4816 15.7818 11.159 16.0022 11.854 16C11.9027 16 11.9513 16 12 16C12.059 16 12.119 16 12.178 16C12.864 16.0011 13.5329 15.7863 14.09 15.386C14.1427 15.3322 14.2147 15.302 14.29 15.302C14.3653 15.302 14.4373 15.3322 14.49 15.386C14.5985 15.4981 14.5962 15.6767 14.485 15.786V15.746C13.8213 16.2481 13.0123 16.5208 12.18 16.523V16.524ZM14.307 14.08H14.291L14.299 14.041C13.8591 14.011 13.4994 13.6789 13.4343 13.2429C13.3691 12.8068 13.6162 12.3842 14.028 12.2269C14.4399 12.0697 14.9058 12.2202 15.1478 12.5887C15.3899 12.9572 15.3429 13.4445 15.035 13.76C14.856 13.9554 14.6059 14.0707 14.341 14.08H14.306H14.307ZM9.67 14C9.11772 14 8.67 13.5523 8.67 13C8.67 12.4477 9.11772 12 9.67 12C10.2223 12 10.67 12.4477 10.67 13C10.67 13.5523 10.2223 14 9.67 14Z"></path>
-                    </svg>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="mx-2  hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white"
-                    aria-label="Facebook"
-                  >
-                    <svg
-                      class="w-6 h-6 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M2.00195 12.002C2.00312 16.9214 5.58036 21.1101 10.439 21.881V14.892H7.90195V12.002H10.442V9.80204C10.3284 8.75958 10.6845 7.72064 11.4136 6.96698C12.1427 6.21332 13.1693 5.82306 14.215 5.90204C14.9655 5.91417 15.7141 5.98101 16.455 6.10205V8.56104H15.191C14.7558 8.50405 14.3183 8.64777 14.0017 8.95171C13.6851 9.25566 13.5237 9.68693 13.563 10.124V12.002H16.334L15.891 14.893H13.563V21.881C18.8174 21.0506 22.502 16.2518 21.9475 10.9611C21.3929 5.67041 16.7932 1.73997 11.4808 2.01722C6.16831 2.29447 2.0028 6.68235 2.00195 12.002Z"></path>
-                    </svg>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="mx-2  hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white"
-                    aria-label="Github"
-                  >
-                    <svg
-                      class="w-6 h-6 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12.026 2C7.13295 1.99937 2.96183 5.54799 2.17842 10.3779C1.395 15.2079 4.23061 19.893 8.87302 21.439C9.37302 21.529 9.55202 21.222 9.55202 20.958C9.55202 20.721 9.54402 20.093 9.54102 19.258C6.76602 19.858 6.18002 17.92 6.18002 17.92C5.99733 17.317 5.60459 16.7993 5.07302 16.461C4.17302 15.842 5.14202 15.856 5.14202 15.856C5.78269 15.9438 6.34657 16.3235 6.66902 16.884C6.94195 17.3803 7.40177 17.747 7.94632 17.9026C8.49087 18.0583 9.07503 17.99 9.56902 17.713C9.61544 17.207 9.84055 16.7341 10.204 16.379C7.99002 16.128 5.66202 15.272 5.66202 11.449C5.64973 10.4602 6.01691 9.5043 6.68802 8.778C6.38437 7.91731 6.42013 6.97325 6.78802 6.138C6.78802 6.138 7.62502 5.869 9.53002 7.159C11.1639 6.71101 12.8882 6.71101 14.522 7.159C16.428 5.868 17.264 6.138 17.264 6.138C17.6336 6.97286 17.6694 7.91757 17.364 8.778C18.0376 9.50423 18.4045 10.4626 18.388 11.453C18.388 15.286 16.058 16.128 13.836 16.375C14.3153 16.8651 14.5612 17.5373 14.511 18.221C14.511 19.555 14.499 20.631 14.499 20.958C14.499 21.225 14.677 21.535 15.186 21.437C19.8265 19.8884 22.6591 15.203 21.874 10.3743C21.089 5.54565 16.9181 1.99888 12.026 2Z"></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              <div class="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-yellow-600 dark:border-gray-700 dark:hover:border-transparent">
-                <img
-                  class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
-                  src="/sir.png"
-                  alt=""
-                />
-
-                <h1 class="mt-4 text-2xl font-semibold  capitalize group-hover:text-white">
-                  Rohit
-                </h1>
-
-                <p class="mt-2  group-hover:text-gray-300">Senior Developer</p>
-
-                <div class="flex mt-3 -mx-2">
-                  <a
-                    href="#"
-                    class="mx-2   group-hover:text-white"
-                    aria-label="Reddit"
-                  >
-                    <svg
-                      class="w-6 h-6 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM6.807 10.543C6.20862 10.5433 5.67102 10.9088 5.45054 11.465C5.23006 12.0213 5.37133 12.6558 5.807 13.066C5.92217 13.1751 6.05463 13.2643 6.199 13.33C6.18644 13.4761 6.18644 13.6229 6.199 13.769C6.199 16.009 8.814 17.831 12.028 17.831C15.242 17.831 17.858 16.009 17.858 13.769C17.8696 13.6229 17.8696 13.4761 17.858 13.33C18.4649 13.0351 18.786 12.3585 18.6305 11.7019C18.475 11.0453 17.8847 10.5844 17.21 10.593H17.157C16.7988 10.6062 16.458 10.7512 16.2 11C15.0625 10.2265 13.7252 9.79927 12.35 9.77L13 6.65L15.138 7.1C15.1931 7.60706 15.621 7.99141 16.131 7.992C16.1674 7.99196 16.2038 7.98995 16.24 7.986C16.7702 7.93278 17.1655 7.47314 17.1389 6.94094C17.1122 6.40873 16.6729 5.991 16.14 5.991C16.1022 5.99191 16.0645 5.99491 16.027 6C15.71 6.03367 15.4281 6.21641 15.268 6.492L12.82 6C12.7983 5.99535 12.7762 5.993 12.754 5.993C12.6094 5.99472 12.4851 6.09583 12.454 6.237L11.706 9.71C10.3138 9.7297 8.95795 10.157 7.806 10.939C7.53601 10.6839 7.17843 10.5422 6.807 10.543ZM12.18 16.524C12.124 16.524 12.067 16.524 12.011 16.524C11.955 16.524 11.898 16.524 11.842 16.524C11.0121 16.5208 10.2054 16.2497 9.542 15.751C9.49626 15.6958 9.47445 15.6246 9.4814 15.5533C9.48834 15.482 9.52348 15.4163 9.579 15.371C9.62737 15.3318 9.68771 15.3102 9.75 15.31C9.81233 15.31 9.87275 15.3315 9.921 15.371C10.4816 15.7818 11.159 16.0022 11.854 16C11.9027 16 11.9513 16 12 16C12.059 16 12.119 16 12.178 16C12.864 16.0011 13.5329 15.7863 14.09 15.386C14.1427 15.3322 14.2147 15.302 14.29 15.302C14.3653 15.302 14.4373 15.3322 14.49 15.386C14.5985 15.4981 14.5962 15.6767 14.485 15.786V15.746C13.8213 16.2481 13.0123 16.5208 12.18 16.523V16.524ZM14.307 14.08H14.291L14.299 14.041C13.8591 14.011 13.4994 13.6789 13.4343 13.2429C13.3691 12.8068 13.6162 12.3842 14.028 12.2269C14.4399 12.0697 14.9058 12.2202 15.1478 12.5887C15.3899 12.9572 15.3429 13.4445 15.035 13.76C14.856 13.9554 14.6059 14.0707 14.341 14.08H14.306H14.307ZM9.67 14C9.11772 14 8.67 13.5523 8.67 13C8.67 12.4477 9.11772 12 9.67 12C10.2223 12 10.67 12.4477 10.67 13C10.67 13.5523 10.2223 14 9.67 14Z"></path>
-                    </svg>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="mx-2   h group-hover:text-white"
-                    aria-label="Facebook"
-                  >
-                    <svg
-                      class="w-6 h-6 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M2.00195 12.002C2.00312 16.9214 5.58036 21.1101 10.439 21.881V14.892H7.90195V12.002H10.442V9.80204C10.3284 8.75958 10.6845 7.72064 11.4136 6.96698C12.1427 6.21332 13.1693 5.82306 14.215 5.90204C14.9655 5.91417 15.7141 5.98101 16.455 6.10205V8.56104H15.191C14.7558 8.50405 14.3183 8.64777 14.0017 8.95171C13.6851 9.25566 13.5237 9.68693 13.563 10.124V12.002H16.334L15.891 14.893H13.563V21.881C18.8174 21.0506 22.502 16.2518 21.9475 10.9611C21.3929 5.67041 16.7932 1.73997 11.4808 2.01722C6.16831 2.29447 2.0028 6.68235 2.00195 12.002Z"></path>
-                    </svg>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="mx-2  group-hover:text-white"
-                    aria-label="Github"
-                  >
-                    <svg
-                      class="w-6 h-6 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12.026 2C7.13295 1.99937 2.96183 5.54799 2.17842 10.3779C1.395 15.2079 4.23061 19.893 8.87302 21.439C9.37302 21.529 9.55202 21.222 9.55202 20.958C9.55202 20.721 9.54402 20.093 9.54102 19.258C6.76602 19.858 6.18002 17.92 6.18002 17.92C5.99733 17.317 5.60459 16.7993 5.07302 16.461C4.17302 15.842 5.14202 15.856 5.14202 15.856C5.78269 15.9438 6.34657 16.3235 6.66902 16.884C6.94195 17.3803 7.40177 17.747 7.94632 17.9026C8.49087 18.0583 9.07503 17.99 9.56902 17.713C9.61544 17.207 9.84055 16.7341 10.204 16.379C7.99002 16.128 5.66202 15.272 5.66202 11.449C5.64973 10.4602 6.01691 9.5043 6.68802 8.778C6.38437 7.91731 6.42013 6.97325 6.78802 6.138C6.78802 6.138 7.62502 5.869 9.53002 7.159C11.1639 6.71101 12.8882 6.71101 14.522 7.159C16.428 5.868 17.264 6.138 17.264 6.138C17.6336 6.97286 17.6694 7.91757 17.364 8.778C18.0376 9.50423 18.4045 10.4626 18.388 11.453C18.388 15.286 16.058 16.128 13.836 16.375C14.3153 16.8651 14.5612 17.5373 14.511 18.221C14.511 19.555 14.499 20.631 14.499 20.958C14.499 21.225 14.677 21.535 15.186 21.437C19.8265 19.8884 22.6591 15.203 21.874 10.3743C21.089 5.54565 16.9181 1.99888 12.026 2Z"></path>
-                    </svg>
-                  </a>
-                </div>
+                <button className="btn btn-primary">Join us</button>
               </div>
             </div>
           </div>
-        </section>
-      </div>
-      <div>
-        <Footer />
-      </div>
+
+          {/* My Team section */}
+          <div>
+            <section className="container px-6 py-10 mx-auto">
+              <h1 className="text-2xl font-semibold text-center capitalize lg:text-3xl">Our Executive Team</h1>
+              <p className="max-w-2xl mx-auto my-6 text-center">
+                As a recent college graduate eager to embark on a rewarding career journey, I am passionate about learning
+                and honing my skills as a Full Stack Developer. Armed with a solid academic foundation and a hunger for new
+                challenges, I am committed to staying abreast of industry trends and technologies. My goal is to contribute
+                meaningfully to a dynamic team, leveraging my adaptability and dedication to continuous improvement. I am
+                excited about the opportunity to apply my fresh perspective and foundational knowledge to real-world
+                projects, making a positive impact and evolving into a proficient Full Stack Developer.
+              </p>
+              <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
+                <div className="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-yellow-600 dark:border-gray-700 dark:hover:border-transparent">
+                  <img className="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" src="/my_pic.png" alt="Satyam" />
+                  <h1 className="mt-4 text-2xl font-semibold text-white-700 capitalize group-hover:text-white">Satyam</h1>
+                  <p className="mt-2 capitalize group-hover:text-gray-300">Software Developer</p>
+                  <div className="flex mt-3 -mx-2">
+                    <a href="#" className="mx-2 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white" aria-label="Reddit">
+                      <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zM6.807 10.543c-.598.001-1.136.366-1.357.922-.221.557-.08 1.191.356 1.601.115.109.247.198.391.264-.012.146-.012.293 0 .439 0 2.24 2.615 4.062 5.829 4.062s5.829-1.822 5.829-4.062c.011-.146.011-.293 0-.439.606.305.927.982.772 1.638-.155.656-.745 1.117-1.419 1.106h-.053c-.358-.014-.699-.159-.957-.407-1.138.774-2.475 1.201-3.85 1.23L13 6.65l2.138.45c.055.507.482.891.992.892.037 0 .074-.002.111-.006.53-.053.925-.513.898-1.045-.027-.532-.466-.95-1-.951-.038 0-.076.003-.113.009-.329.034-.611.217-.771.493L12.82 6c-.022-.005-.044-.007-.066-.007-.145.002-.269.103-.3.245L11.706 9.71c-1.392-.02-2.747.407-3.899 1.189-.27-.255-.628-.397-.999-.397zm5.373 5.981c-.056 0-.113 0-.169.001-.944.004-1.75-.267-2.413-.766a.751.751 0 00-.321-.1.751.751 0 00-.319.1c-.56.411-1.237.631-1.932.629a4.345 4.345 0 01-.997-.102 4.504 4.504 0 01-2.102-1.023 3.217 3.217 0 01-.527-.569l-.157-.193.157.193a.738.738 0 00.235.182 3.217 3.217 0 00.527.569 4.504 4.504 0 002.102 1.023 4.345 4.345 0 00.997.102c.695.002 1.372-.218 1.932-.629a.751.751 0 00.321-.1.751.751 0 00.319.1c.663.499 1.47.77 2.414.766h.169c.832-.001 1.641-.272 2.198-.772l.157-.193-.157.193a3.217 3.217 0 00.527-.569 4.504 4.504 0 00.527-.569 3.217 3.217 0 00.527-.569l.157-.193-.157.193c-.191-.246-.512-.379-.827-.369-.341-.008-.676-.171-.927-.457l-.093-.106.093.106c.191-.246.512-.379.827-.369.316-.01.636-.123.827-.369.191-.246.328-.562.393-.904.064-.342.014-.692-.14-1.018a1.515 1.515 0 00-1.286-.84 1.515 1.515 0 00-.486.108c-.233.099-.45.275-.64.496l-.14.161-.155.178a.838.838 0 00-.184.235l-.087.115a.743.743 0 00-.103.154l-.035.052a.838.838 0 00-.058.164c-.035.11-.074.222-.123.332a.838.838 0 00-.123.332.838.838 0 00-.058.164l-.035.052a.838.838 0 00-.103.154l-.087.115c-.058.076-.12.148-.184.235l-.14.161-.14.161-.155.178c-.191.221-.407.397-.64.496-.08.036-.163.065-.248.086a1.515 1.515 0 01-1.353-.116 1.515 1.515 0 01-.928-.496 3.217 3.217 0 01-.466-.639 4.504 4.504 0 01-.527-.569 3.217 3.217 0 01-.527-.569l-.157-.193.157.193z"></path>
+                      </svg>
+                    </a>
+                    <a href="#" className="mx-2 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white" aria-label="Facebook">
+                      <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54v-2.91h2.54V9.915c0-2.506 1.492-3.89 3.777-3.89 1.096 0 2.24.196 2.24.196v2.47h-1.262c-1.242 0-1.63.77-1.63 1.556v1.886h2.773l-.443 2.91H15.563V21.88C20.343 21.128 22 17.99 22 13 22 7.478 17.523 3 12 3S2 7.478 2 13c0 5.006 3.657 9.128 8.438 9.878V14.89h-2.54v-2.91h2.54V9.915c0-2.506 1.492-3.89 3.777-3.89 1.096 0 2.24.196 2.24.196v2.47h-1.262c-1.242 0-1.63.77-1.63 1.556v1.886h2.773l-.443 2.91H15.563V21.88C20.343 21.128 22 17.99 22 13"></path>
+                      </svg>
+                    </a>
+                    <a href="#" className="mx-2 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white" aria-label="Github">
+                      <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.477 2 2 6.477 2 12a9.96 9.96 0 004.581 8.376c.336.061.46-.146.46-.325v-1.125c-1.872.408-2.26-.911-2.26-.911-.306-.783-.747-.99-.747-.99-.611-.417.047-.409.047-.409.676.05 1.031.693 1.031.693.606 1.04 1.544.74 1.916.566.062-.438.238-.74.433-.911-1.497-.17-3.073-.748-3.073-3.315 0-.733.258-1.333.681-1.803-.064-.17-.295-.85.064-1.78 0 0 .568-.185 1.862.684a6.41 6.41 0 011.693-.227c.575.003 1.154.078 1.693.227 1.295-.87 1.862-.684 1.862-.684.359.93.128 1.61.064 1.78.424.47.681 1.07.681 1.803 0 2.573-1.576 3.144-3.073 3.315.245.211.465.624.465 1.26v1.87c0 .179.124.386.46.325A9.96 9.96 0 0022 12c0-5.523-4.477-10-10-10z"></path>
+                      </svg>
+                    </a>
+                    <a href="#" className="mx-2 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white" aria-label="LinkedIn">
+                      <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.002 12c0-5.523-4.478-10.002-10.002-10.002C6.478 1.998 2 6.478 2 12c0 5.523 4.478 10.002 10.002 10.002C17.524 22.002 22.002 17.523 22.002 12zM8.337 16.947H5.862v-7.32h2.475v7.32zm-1.24-8.334H7.09c-.787 0-1.286-.538-1.286-1.238 0-.716.51-1.238 1.32-1.238s1.286.522 1.316 1.238c0 .7-.52 1.238-1.315 1.238zm10.055 8.334h-2.46v-3.946c0-.989-.325-1.664-1.15-1.664-.632 0-1.008.43-1.175.848-.064.162-.08.39-.08.618v4.143H10.97v-7.32h2.46v.97h.035c.332-.51.93-1.234 2.075-1.234 1.52 0 2.665 1.01 2.665 3.183v4.4h.003z"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
+
 export default About_us;
