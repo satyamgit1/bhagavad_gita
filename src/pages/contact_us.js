@@ -62,7 +62,7 @@ function Contact() {
             <div className="lg:flex">
               {!submitSuccess && (
                 <div className="lg:w-2/3 lg:mx-10">
-                  <h1 className="text-2xl font-semibold lg:text-3xl">Let's talk</h1>
+                  <h1 className="text-2xl font-semibold lg:text-3xl">Let&apos;s talk</h1>
                   <p className="mt-4">
                     Ask us everything and we would love to hear from you
                   </p>
