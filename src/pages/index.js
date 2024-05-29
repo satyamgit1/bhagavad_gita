@@ -25,7 +25,7 @@ export default function Home() {
         setChapters(data);
         //   setshow(data["results"]);
       });
-  }, [selectedChapter]); // Include selectedChapter in the dependency array
+  }, [selectedChapter]);// eslint-disable-line react-hooks/exhaustive-deps
   
   const handleSelectedChapter = (e) => {
     let current = e.target.value;
@@ -59,6 +59,7 @@ export default function Home() {
       }
     };
   }
+/* eslint-disable react-hooks/exhaustive-deps */
 
   React.useEffect(() => {
     console.log(noofslokens, "shlok_options");
