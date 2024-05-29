@@ -26,7 +26,7 @@ export default function Home() {
         //   setshow(data["results"]);
       });
   }, [selectedChapter]); // Include selectedChapter in the dependency array
-
+  
   const handleSelectedChapter = (e) => {
     let current = e.target.value;
     setSelectedChapter(e.target.value);
