@@ -148,9 +148,8 @@ function Contact() {
               <div className="mt-12 lg:flex lg:mt-0 lg:flex-col lg:items-center lg:w-1/2 lg:mx-10">
                 <Image
                   className="hidden object-cover mx-auto rounded-full lg:block shrink-0 w-96 h-96"
-                  src="/logo.png"
-                  alt=""
-                />
+                  src="/logo.png" alt="Logo" width={100} height={100} />
+                
                 <div className="mt-6 space-y-8 md:mt-8">
                   <p className="flex items-start -mx-2">
                     <svg
