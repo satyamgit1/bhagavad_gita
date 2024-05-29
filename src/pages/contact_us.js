@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { myFetch } from "@/utils/myFetch";
+import Image from "next/image";
 
 
 function Contact() {
