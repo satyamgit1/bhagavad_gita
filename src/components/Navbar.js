@@ -5,7 +5,6 @@ import Image from "next/image"; // Import Image component
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
-  const { theme, setTheme } = useTheme();
   const {  loginWithRedirect, isAuthenticated, logout,user } = useAuth0();
 
   return (
@@ -77,25 +76,7 @@ function Navbar() {
             </li>
           )}
 
-          <li>
-            <select
-              value={theme}
-              onChange={(e) => setTheme(e.target.value)}
-              className="select select-bordered"
-            >
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="cyberpunk">Cyberpunk</option>
-              <option value="halloween">Halloween</option>
-              <option value="valentine">Valentine</option>
-              <option value="winter">Winter</option>
-              <option value="aqua">Aqua</option>
-              <option value="retro">Retro</option>
-              <option value="luxury">Luxury</option>
-              <option value="black">Black</option>
-              <option value="dim">Dim</option>
-            </select>
-          </li>
+         
         </ul>
       </div>
     </div>
