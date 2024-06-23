@@ -40,7 +40,11 @@ function Navbar() {
             <li>
               <Link href="/audiobook">Audio Book</Link>
             </li>
-            <li>{isAuthenticated && <p>{user.name}</p>}</li>
+            {isAuthenticated && 
+              <li>
+                <p>{user.name}</p>
+              </li>
+            }
           {isAuthenticated ? (
             <li>
               <button
@@ -75,7 +79,11 @@ function Navbar() {
           <li>
             <Link href="/audiobook">Audio Book</Link>
           </li>
-          <li>{isAuthenticated && <p>{user.name}</p>}</li>
+          {isAuthenticated &&
+            <li>
+              <p>{user.name}</p>
+            </li>
+          }
           {isAuthenticated ? (
             <li>
               <button
