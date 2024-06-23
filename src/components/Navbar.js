@@ -2,9 +2,11 @@ import React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image"; // Import Image component
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
   const { theme, setTheme } = useTheme();
+  const {  loginWithRedirect, isAuthenticated, logout,user } = useAuth0();
 
   return (
     <div className="navbar bg-base-200">
@@ -58,6 +60,23 @@ function Navbar() {
           <li>
             <Link href="/audiobook">Audio Book</Link>
           </li>
+          <li>{isAuthenticated && <p>{user.name}</p>}</li>
+          {isAuthenticated ? (
+            <li>
+              <button
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
+                Log Out
+              </button>
+            </li>
+          ) : (
+            <li>
+              <button onClick={() => loginWithRedirect()}>Log In</button>
+            </li>
+          )}
+
           <li>
             <select
               value={theme}
