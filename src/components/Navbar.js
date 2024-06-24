@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image"; // Import Image component
 import { useAuth0 } from "@auth0/auth0-react";
 
+
 function Navbar() {
   const {  loginWithRedirect, isAuthenticated, logout,user } = useAuth0();
 
@@ -47,7 +48,7 @@ function Navbar() {
             }
           {isAuthenticated ? (
             <li>
-              <button
+              <button class = "toggle-switch"
                 onClick={() =>
                   logout({ logoutParams: { returnTo: window.location.origin } })
                 }

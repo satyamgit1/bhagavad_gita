@@ -8,7 +8,7 @@ function Footer() {
     
     <footer data-theme=" retro"   className="footer footer-center p-10 bg-base-200 text-base-content rounded">
      <li>
-            <select
+            {/* <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
               className="select select-bordered"
@@ -24,7 +24,13 @@ function Footer() {
               <option value="luxury">Luxury</option>
               <option value="black">Black</option>
               <option value="dim">Dim</option>
-            </select>
+            </select> */}
+            <div class="form-control">
+  <label class="label cursor-pointer">
+    <span class="label-text mr-2">Theme</span>
+    <input type="checkbox" class="toggle" checked={theme === 'dark'} onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')} />
+  </label>
+</div>
           </li>
   <nav className="grid grid-flow-col gap-4">
   

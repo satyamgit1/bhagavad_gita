@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import { Auth0Provider } from '@auth0/auth0-react';
 
+
 export default function App({ Component, pageProps }) {
   return (
     <Auth0Provider
