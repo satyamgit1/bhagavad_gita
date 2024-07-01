@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import Newsletter from "@/components/Newsletter";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
@@ -159,6 +160,7 @@ export default function Home() {
 
         <br />
         <Accordion />
+        <Newsletter/>
         <Footer />
       </div>
     </div>

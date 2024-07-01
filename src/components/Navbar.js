@@ -1,12 +1,15 @@
 import React from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import Image from "next/image"; // Import Image component
+import Image from "next/image";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function Navbar() {
-  const {  loginWithRedirect, isAuthenticated, logout,user } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="navbar bg-base-200">
@@ -41,36 +44,42 @@ function Navbar() {
             <li>
               <Link href="/audiobook">Audio Book</Link>
             </li>
-            {isAuthenticated && 
+            {isAuthenticated && (
               <li>
                 <p>{user.name}</p>
               </li>
-            }
-          {isAuthenticated ? (
-            <li>
-              <button class = "toggle-switch"
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
-              >
-                Log Out
-              </button>
-            </li>
-          ) : (
-            <li>
-              <button onClick={() => loginWithRedirect()}>Log In</button>
-            </li>
-          )}
+            )}
+            {isAuthenticated ? (
+              <li>
+                <button
+                  className="toggle-switch"
+                  onClick={() =>
+                    logout({ logoutParams: { returnTo: window.location.origin } })
+                  }
+                >
+                  Log Out
+                </button>
+              </li>
+            ) : (
+              <li>
+                <button onClick={() => loginWithRedirect()}>Log In</button>
+              </li>
+            )}
           </ul>
         </div>
-        <Link href="/">
-          {/* Use Image component instead of img tag */}
-          <Image src="/logo.png" alt="logo" width={64} height={64} />
+        <Link href="/" onClick={handleRefresh}>
+          
+            <Image src="/logo.png" alt="logo" width={64} height={64} />
+          
         </Link>
+        
       </div>
 
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
+        <li>
+            <Link href="/">Home Page</Link>
+          </li>
           <li>
             <Link href="/about_us">About us</Link>
           </li>
@@ -80,11 +89,11 @@ function Navbar() {
           <li>
             <Link href="/audiobook">Audio Book</Link>
           </li>
-          {isAuthenticated &&
+          {isAuthenticated && (
             <li>
               <p>{user.name}</p>
             </li>
-          }
+          )}
           {isAuthenticated ? (
             <li>
               <button
@@ -100,8 +109,6 @@ function Navbar() {
               <button onClick={() => loginWithRedirect()}>Log In</button>
             </li>
           )}
-
-         
         </ul>
       </div>
     </div>
