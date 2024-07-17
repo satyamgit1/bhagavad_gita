@@ -20,7 +20,7 @@ export default function Home() {
   const [shlok_data, setShlokData] = useState();
 
   React.useEffect(() => {
-    let url = "https://bhagavadgitaapi.in/chapters/";
+    let url = "";
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
