@@ -1,5 +1,6 @@
 // pages/_app.js
 import '@/styles/globals.css';
+import '@/styles/verses.css';
 import { ThemeProvider } from 'next-themes';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { Analytics } from '@vercel/analytics/react';
