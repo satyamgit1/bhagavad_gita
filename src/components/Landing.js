@@ -56,7 +56,7 @@ export default function Landing() {
                   className="flex border w-full md:w-auto mt-5 md:mt-0 border-pink justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink cursor-pointer "
                   onClick={handleBeginNewLife}
                 >
-                  Begin New Life
+                  Read Now
                 </div>
 
                 <div>

@@ -25,10 +25,10 @@ function Footer() {
               <option value="black">Black</option>
               <option value="dim">Dim</option>
             </select> */}
-            <div class="form-control">
-  <label class="label cursor-pointer">
-    <span class="label-text mr-2">Theme</span>
-    <input type="checkbox" class="toggle" checked={theme === 'dark'} onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')} />
+            <div className="form-control">
+  <label className="label cursor-pointer">
+    <span className="label-text mr-2">Theme</span>
+    <input type="checkbox" className="toggle" checked={theme === 'dark'} onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')} />
   </label>
 </div>
           </li>
