@@ -6,7 +6,7 @@ export const Accordion = () => {
     <div>
       <section className=" ">
         <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
-          <h2 className="text-2xl font-semibold sm:text-4xl">
+          <h2 className="text-2xl font-semibold sm:text-4xl text-yellow-700">
             Explore the Teachings
           </h2>
           <p className="mt-4 mb-8 ">
@@ -14,7 +14,7 @@ export const Accordion = () => {
           </p>
           <div className="space-y-4">
             <details className="w-full border rounded-lg">
-              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600 text-yellow-600">
                 What is the Bhagavad Gita?
               </summary>
               <p className="px-4 py-6 pt-0 ml-4 -mt-4 ">
@@ -25,7 +25,7 @@ export const Accordion = () => {
               </p>
             </details>
             <details className="w-full border rounded-lg">
-              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600 text-yellow-600">
               How can I apply the teachings of the Bhagavad Gita in my daily life?
               </summary>
               <p className="px-4 py-6 pt-0 ml-4 -mt-4">
@@ -33,7 +33,7 @@ export const Accordion = () => {
               </p>
             </details>
             <details className="w-full border rounded-lg">
-              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600 text-yellow-600">
                 What are some famous verses from the Bhagavad Gita?
               </summary>
               <p className="px-4 py-6 pt-0 ml-4 -mt-4 ">
@@ -41,7 +41,7 @@ export const Accordion = () => {
               </p>
             </details>
             <details className="w-full border rounded-lg">
-              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600 text-yellow-600">
               What is the significance of the teachings of the Bhagavad Gita?
               </summary>
               <p className="px-4 py-6 pt-0 ml-4 -mt-4 ">

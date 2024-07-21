@@ -168,144 +168,6 @@
 // }
 
 
-// import { useEffect, useState } from 'react';
-// import Link from 'next/link';
-// import { useRouter } from 'next/router';
-// import Navbar from '@/components/Navbar';
-// import Landing from "@/components/Landing";
-// import Newsletter from "@/components/Newsletter";
-// import Footer from "@/components/Footer";
-// import { Accordion } from "@/components/Accordion";
-
-// export default function Home() {
-//   const [chapters, setChapters] = useState([]);
-//   const [verses, setVerses] = useState([]);
-//   const [verseDetails, setVerseDetails] = useState(null);
-//   const [currentChapter, setCurrentChapter] = useState(null);
-//   const [currentVerse, setCurrentVerse] = useState(null);
-//   const router = useRouter();
-//   const { query } = router;
-
-//   useEffect(() => {
-//     fetchChapters();
-//   }, []);
-
-//   useEffect(() => {
-//     if (query.chapter) {
-//       fetchVerses(query.chapter);
-//       setCurrentChapter(query.chapter);
-//       setVerseDetails(null);
-//     }
-//   }, [query.chapter]);
-
-//   useEffect(() => {
-//     if (query.verse) {
-//       fetchVerseDetails(query.chapter, query.verse);
-//       setCurrentVerse(query.verse);
-//     }
-//   }, [query.chapter, query.verse]);
-
-//   const fetchChapters = async () => {
-//     const res = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
-//     const data = await res.json();
-//     const chaptersWithVersesCount = await Promise.all(
-//       data.chapters.map(async (chapter) => {
-//         const verseRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${chapter.chapter_number}`);
-//         const verseData = await verseRes.json();
-//         return { ...chapter, verses_count: verseData.verses.length };
-//       })
-//     );
-//     setChapters(chaptersWithVersesCount);
-//   };
-
-//   const fetchVerses = async (chapterId) => {
-//     const res = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${chapterId}`);
-//     const data = await res.json();
-//     setVerses(data.verses);
-//   };
-
-//   const fetchVerseDetails = async (chapterId, verseId) => {
-//     const res = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verse/${chapterId}.${verseId}`);
-//     const data = await res.json();
-//     setVerseDetails(data.verseDetails);
-//   };
-
-//   return (
-//     <div>
-//       <Navbar />
-//       <br />
-//       {!currentChapter && !currentVerse && <Landing />}
-      
-//       <div className="container mx-auto p-4">
-//         <h1 className="text-2xl font-bold mb-4">Bhagavad Gita</h1>
-//         {!currentChapter && (
-//           <div>
-//             <h2 className="text-xl font-bold mb-2">Chapters</h2>
-//             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-//               {chapters.map((chapter) => (
-//                 <Link key={chapter.chapter_number} href={`/?chapter=${chapter.chapter_number}`}>
-//                   <div className="p-4 border rounded shadow-sm hover:shadow-md cursor-pointer">
-//                     <h3 className="text-lg font-semibold text-orange-600">Chapter {chapter.chapter_number}</h3>
-//                     <h3 className="text-lg font-semibold">{chapter.name}</h3>
-//                     <p className="text-gray-600 mt-2 flex items-center">
-//                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-//                       </svg>
-//                       {chapter.verses_count} Verses
-//                     </p>
-//                   </div>
-//                 </Link>
-//               ))}
-//             </div>
-//           </div>
-//         )}
-//         {currentChapter && !currentVerse && (
-//           <div>
-//             <button onClick={() => setCurrentChapter(null)} className="mb-4 p-2 bg-gray-200 rounded">Back to Chapters</button>
-//             <h2 className="text-xl font-bold mb-2">Chapter {currentChapter} Verses</h2>
-//             <div className="grid grid-cols-1 gap-4">
-//               {verses.map((verse) => (
-//                 <Link key={verse.verse_number} href={`/?chapter=${currentChapter}&verse=${verse.verse_number}`}>
-//                   <div className="p-4 border rounded shadow-sm hover:shadow-md cursor-pointer">
-//                     <h3 className="text-lg">{verse.text}</h3>
-//                   </div>
-//                 </Link>
-//               ))}
-//             </div>
-//           </div>
-//         )}
-//         {verseDetails && (
-//           <div>
-//             <button onClick={() => setCurrentVerse(null)} className="mb-4 p-2 bg-gray-200 rounded">Back to Verses</button>
-//             <h2 className="text-xl font-bold mb-4">Verse {verseDetails.verse_number}</h2>
-//             <p className="mb-2"><strong>Sanskrit:</strong> {verseDetails.sanskrit_shlok}</p>
-//             <p className="mb-2"><strong>Transliteration:</strong> {verseDetails.english_shlok}</p>
-//             <p className="mb-2"><strong>Translation:</strong> {verseDetails.translation}</p>
-//             <div className="mt-4">
-//               <h3 className="text-lg font-bold mb-2">Purport:</h3>
-//               {Array.isArray(verseDetails.purport) ? (
-//                 verseDetails.purport.map((text, index) => (
-//                   <p key={index} className="mb-2">{text}</p>
-//                 ))
-//               ) : (
-//                 <p>No purport available.</p>
-//               )}
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//       <Accordion />
-//       <Newsletter />
-//       <Footer />
-//     </div>
-//   );
-// }
-
-
-
-
-
-
 // pages/index.js
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -400,7 +262,7 @@ export default function Home() {
               {currentVerse && (
                 <>
                   <li>
-                    <button onClick={handleBackToVerses} className="custom-text-blue hover:underline">Back to Verses</button>
+                    <button onClick={handleBackToVerses} className="text-orange-600 hover:underline">Back to Verses</button>
                   </li>
                   <li>/</li>
                 </>
@@ -408,7 +270,7 @@ export default function Home() {
               {currentChapter && !currentVerse && (
                 <>
                   <li>
-                    <button onClick={handleBackToChapters} className="custom-text-blue hover:underline">Back to Chapters</button>
+                    <button onClick={handleBackToChapters} className="text-orange-600 hover:underline">Back to Chapters</button>
                   </li>
                   <li>/</li>
                 </>
@@ -442,12 +304,15 @@ export default function Home() {
           )}
           {currentChapter && !currentVerse && (
             <div>
-              <button onClick={handleBackToChapters} className="mb-4 p-2 custom-bg-gray-200 text-black rounded custom-shadow-md">Back to Chapters</button>
+              <button onClick={handleBackToChapters} className="mb-4 p-2 border-black bg-yellow-500 text-black  rounded custom-shadow-md">Back to Chapters</button>
               <h2 className="text-xl font-bold mb-2">Chapter {currentChapter} Verses</h2>
               <div className="grid grid-cols-1 gap-4">
-                {verses.map((verse) => (
+                {verses.map((verse, index) => (
                   <Link key={verse.verse_number} href={`/?chapter=${currentChapter}&verse=${verse.verse_number}`}>
                     <div className="p-4 border rounded shadow-sm hover:shadow-md cursor-pointer custom-h-24 flex items-center custom-transition-transform custom-transform hover:custom-hover-scale-105">
+                      <button className="w-12 h-12 border border-black bg-yellow-500 text-black rounded-lg flex items-center justify-center mr-2">
+                        Verse {index + 1}
+                      </button>
                       <h3 className="text-lg">{verse.text}</h3>
                     </div>
                   </Link>
@@ -456,16 +321,23 @@ export default function Home() {
             </div>
           )}
           {verseDetails && (
-            <div className="custom-bg-lightpink p-6 rounded-lg custom-shadow-lg">
-              <button onClick={handleBackToVerses} className="mb-4 p-2 text-black custom-bg-gray-200 rounded custom-shadow-md">Back to Verses</button>
-              <h2 className="text-2xl font-bold mb-4">Verse {verseDetails.verse_number}</h2>
-              <div className="mb-4 p-4 border rounded-lg ">
-                <p className="mb-2"><strong className="">Sanskrit:</strong> {verseDetails.sanskrit_shlok}</p>
-                <p className="mb-2"><strong className="">Transliteration:</strong> {verseDetails.english_shlok}</p>
-                <p className="mb-2"><strong className="">Translation:</strong> {verseDetails.translation}</p>
+            <div className="verse-details">
+              <button onClick={handleBackToVerses} className="mb-4 p-2 custom-bg-gray-200 text-black bg-yellow-500 rounded custom-shadow-md">Back to Verses</button>
+              <h2 className="verse-details-heading text-yellow-500">Verse {verseDetails.verse_number}</h2>
+              <div className="verse-details-section ">
+                <div className="verse-details-section-title text-yellow-600">Sanskrit:</div>
+                <div className="verse-details-section-content ">{verseDetails.sanskrit_shlok}</div>
               </div>
-              <div className="mt-4">
-                <h3 className="text-lg font-bold mb-2">Purport:</h3>
+              <div className="verse-details-section">
+                <div className="verse-details-section-title text-yellow-600">Transliteration:</div>
+                <div className="verse-details-section-content ">{verseDetails.english_shlok}</div>
+              </div>
+              <div className="verse-details-section">
+                <div className="verse-details-section-title text-yellow-600">Translation:</div>
+                <div className="verse-details-section-content ">{verseDetails.translation}</div>
+              </div>
+              <div className="verse-details-purport mt-4">
+                <h3 className="text-lg font-bold mb-2 text-yellow-600">Purport:</h3>
                 {Array.isArray(verseDetails.purport) ? (
                   verseDetails.purport.map((text, index) => (
                     <p key={index} className="mb-2">{text}</p>

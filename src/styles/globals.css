@@ -166,6 +166,51 @@
   }
   
 
+/* Verse detail page css */
+
+.verse-details {
+  
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium Shadow */
+}
+
+.verse-details-heading {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verse-details-section {
+  margin-bottom: 1.5rem;
+}
+
+.verse-details-section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: yellow-600; 
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verse-details-section-content {
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verse-details-purport {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium Shadow */
+  
+}
 
 
 

@@ -34,9 +34,9 @@
     color: #3b82f6; /* Blue Text */
   }
   
-  .custom-bg-gray-200 {
+  /* .custom-bg-gray-200 {
     background-color: #e5e7eb; /* Gray Background */
-  }
+  /* } */ 
   
   .custom-shadow-md {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium Shadow */
