@@ -70,3 +70,32 @@
     height: 6rem;
   }
   
+
+  .custom-h-24 {
+    height: 6rem;
+  }
+  
+  .custom-h-48 {
+    height: 12rem;
+  }
+  
+  .custom-transition-transform {
+    transition: transform 0.2s;
+  }
+  
+  .custom-transform:hover {
+    transform: scale(1.05);
+  }
+  
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @media (max-width: 640px) {
+    .custom-h-24 {
+      height: auto; /* Allow height to adjust for mobile */
+    }
+  }
+  
