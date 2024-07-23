@@ -4,7 +4,10 @@ import { Analytics } from '@vercel/analytics/react';
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <meta name="google-site-verification" content="VBR-GaJDEvot2qswTeNcaVlGvqtAUVMrT7Vxqahgzrc" />
+        <meta name="yandex-verification" content="f4b4b4b4b4b4b4b4" />
+      </Head>
       <body>
         <Main />
         <NextScript />
