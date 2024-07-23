@@ -21,7 +21,7 @@ function About_us() {
   return (
     <div>
       <Head>
-        <title>About Us - Satyam Singh</title>
+        <title>About Us</title>
       </Head>
       <Navbar />
       {loading ? (

@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { myFetch } from "@/utils/myFetch";
 import Image from "next/image";
+import Head from "next/head";
 
 
 function Contact() {
@@ -44,6 +45,9 @@ function Contact() {
 
   return (
     <div>
+     <Head>
+        <title>About Us</title>
+      </Head>
       <Navbar />
       {pageLoading ? (
         <div class="loader center ">

@@ -1,10 +1,14 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Head from 'next/head';
 
 export default function Audiobook() {
   return (
     <div>
+     <Head>
+        <title>About Us</title>
+      </Head>
   <div>
         <Navbar />
       </div>
