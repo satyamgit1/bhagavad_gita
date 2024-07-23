@@ -367,6 +367,8 @@ import Landing from "@/components/Landing";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { Accordion } from "@/components/Accordion";
+import Head from 'next/head';
+
 
 export default function Home() {
   const [chapters, setChapters] = useState([]);
@@ -440,6 +442,35 @@ export default function Home() {
 
   return (
     <div>
+<Head>
+        <title> Bhagavad Gita </title>
+        <meta name="description" content="Explore the chapters and verses of the Bhagavad Gita. Discover detailed explanations, translations, and more." />
+        <meta name="keywords" content="Bhagavad Gita, chapters, verses, translations, Hindu scripture" />
+        <meta name="author" content="Satyam Singh" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="Bhagavad Gita - Chapters and Verses" />
+        <meta property="og:description" content="Explore the chapters and verses of the Bhagavad Gita. Discover detailed explanations, translations, and more." />
+        <meta property="og:image" content="/path/to/your-image.jpg" />
+        <meta property="og:url" content="https://www.bhagavadgita.site/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Bhagavad Gita - Chapters and Verses" />
+        <meta name="twitter:description" content="Explore the chapters and verses of the Bhagavad Gita. Discover detailed explanations, translations, and more." />
+        <meta name="twitter:image" content="/path/to/your-image.jpg" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Website",
+            "url": "https://www.bhagavadgita.site/",
+            "name": "Bhagavad Gita - Chapters and Verses",
+            "description": "Explore the chapters and verses of the Bhagavad Gita. Discover detailed explanations, translations, and more.",
+            "author": {
+              "@type": "Person",
+              "name": "Satyam Singh"
+            }
+          })}
+        </script>
+      </Head>
+
       <Navbar />
       {!showChapters && <Landing onBeginNewLife={handleBeginNewLife} />}
       {showChapters && (
