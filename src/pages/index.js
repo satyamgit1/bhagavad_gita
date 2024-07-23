@@ -446,7 +446,7 @@ export default function Home() {
         <title> Bhagavad Gita </title>
         <meta name="description" content="Explore the chapters and verses of the Bhagavad Gita. Discover detailed explanations, translations, and more." />
         <meta name="keywords" content="Bhagavad Gita, chapters, verses, translations, Hindu scripture" />
-        <meta name="google-site-verification" content="VBR-GaJDEvot2qswTeNcaVlGvqtAUVMrT7Vxqahgzrc" />
+        
         <meta name="author" content="Satyam Singh" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta property="og:title" content="Bhagavad Gita - Chapters and Verses" />
