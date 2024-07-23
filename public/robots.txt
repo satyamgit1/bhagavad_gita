@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.bhagavadgita.site/
+
+# Sitemaps
+Sitemap: https://www.bhagavadgita.site/sitemap.xml
+Sitemap: https://yourwebsite.com/my-custom-sitemap-1.xml
+Sitemap: https://yourwebsite.com/my-custom-sitemap-2.xml
