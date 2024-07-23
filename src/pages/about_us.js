@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head"; // Import Head component from Next.js
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import custom from "./custom.module.css";
@@ -19,16 +20,19 @@ function About_us() {
 
   return (
     <div>
+      <Head>
+        <title>About Us - Satyam Singh</title>
+      </Head>
       <Navbar />
       {loading ? (
-        <div class="loader center ">
-          <div class="panWrapper">
-            <div class="pan">
-              <div class="food"></div>
-              <div class="panBase"></div>
-              <div class="panHandle"></div>
+        <div className="loader center">
+          <div className="panWrapper">
+            <div className="pan">
+              <div className="food"></div>
+              <div className="panBase"></div>
+              <div className="panHandle"></div>
             </div>
-            <div class="panShadow"></div>
+            <div className="panShadow"></div>
           </div>
         </div>
       ) : (
