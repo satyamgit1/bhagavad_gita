@@ -259,7 +259,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Explore Bhagavad Gita Chapters, Verses, and Translations with Audio</title>
+        <title>Explore Bhagavad Gita Chapters, Verses, Translations, and Audio</title>
         <meta
           name="description"
           content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
@@ -270,7 +270,7 @@ export default function Home() {
         />
         <meta name="author" content="Satyam Singh" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="Explore Bhagavad Gita Chapters, Verses, and Translations with Audio" />
+        <meta property="og:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
         <meta
           property="og:description"
           content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
@@ -278,7 +278,7 @@ export default function Home() {
         <meta property="og:image" content="/path/to/your-image.jpg" />
         <meta property="og:url" content="https://www.bhagavadgita.site/" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Explore Bhagavad Gita Chapters, Verses, and Translations with Audio" />
+        <meta name="twitter:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
         <meta
           name="twitter:description"
           content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
@@ -289,7 +289,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "Website",
             url: "https://www.bhagavadgita.site/",
-            name: "Explore Bhagavad Gita Chapters, Verses, and Translations with Audio",
+            name: "Explore Bhagavad Gita Chapters, Verses, Translations, and Audio",
             description:
               "Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text.",
             author: {
@@ -305,7 +305,7 @@ export default function Home() {
       {!showChapters && <Landing onBeginNewLife={handleBeginNewLife} />}
       {showChapters && (
         <div className="custom-container mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Bhagavad Gita</h1>
+          <h1 className="text-2xl font-bold mb-4">Explore Bhagavad Gita Chapters</h1>
   
           {/* Breadcrumbs */}
           <div className="custom-breadcrumbs text-sm mb-4">
@@ -385,7 +385,7 @@ export default function Home() {
             <div>
               <button
                 onClick={handleBackToChapters}
-                className="mb-4 p-2 border-black bg-yellow-500 text-black  rounded custom-shadow-md"
+                className="mb-4 p-2 border-black bg-yellow-500 text-black rounded custom-shadow-md"
               >
                 Back to Chapters
               </button>
@@ -420,11 +420,11 @@ export default function Home() {
               <h2 className="verse-details-heading text-yellow-500">
                 Verse {verseDetails.verse_number}
               </h2>
-              <div className="verse-details-section ">
+              <div className="verse-details-section">
                 <div className="verse-details-section-title text-yellow-600">
                   Sanskrit:
                 </div>
-                <div className="verse-details-section-content ">
+                <div className="verse-details-section-content">
                   {verseDetails.sanskrit_shlok}
                 </div>
               </div>
@@ -432,7 +432,7 @@ export default function Home() {
                 <div className="verse-details-section-title text-yellow-600">
                   Transliteration:
                 </div>
-                <div className="verse-details-section-content ">
+                <div className="verse-details-section-content">
                   {verseDetails.english_shlok}
                 </div>
               </div>
@@ -440,7 +440,7 @@ export default function Home() {
                 <div className="verse-details-section-title text-yellow-600">
                   Translation:
                 </div>
-                <div className="verse-details-section-content ">
+                <div className="verse-details-section-content">
                   {verseDetails.translation}
                 </div>
               </div>
@@ -475,7 +475,7 @@ export default function Home() {
       <Footer />
     </div>
   );
-}
+}  
 
 
 //   return (
