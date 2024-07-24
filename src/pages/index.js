@@ -177,6 +177,8 @@ import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { Accordion } from "@/components/Accordion";
 import Head from "next/head";
+import WhatsAppButton from '@/components/WhatsAppButton';
+
 
 export default function Home() {
   const [chapters, setChapters] = useState([]);
@@ -470,9 +472,11 @@ export default function Home() {
           )}
         </div>
       )}
+      <WhatsAppButton />
       <Accordion />
       <Newsletter />
       <Footer />
+
     </div>
   );
 }  
