@@ -3,8 +3,6 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #25d366; /* WhatsApp green color */
-  color: #fff;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -13,6 +11,10 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -o-transition: transform 0.3s ease-in-out;
+  -webkit-transition: transform 0.3s ease-in-out;
+  -moz-transition: transform 0.3s ease-in-out;
+  -ms-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -24,16 +26,20 @@
   position: fixed;
   bottom: 80px;
   right: 20px;
-  background-color: #25d366; /* WhatsApp green color */
-  color: #fff;
-  border-radius: 5px;
+  background-color: #35c233;
+  /*WhatsAppgreencolor*/color: #fff;
+  -o-border-radius: 50px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
   z-index: 999;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  border-radius: 50px;
 }
 
 .icon {
