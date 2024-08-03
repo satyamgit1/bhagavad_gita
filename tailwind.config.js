@@ -4,17 +4,15 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
-    // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {},
     container: {
       center: true,
-    }
+    },
   },
-
+  darkMode: 'class', // Enable dark mode support
   daisyui: {
     themes: [
       "light",
@@ -48,8 +46,8 @@ module.exports = {
       "winter",
     ],
   },
-  
-  plugins: [require("daisyui"),require('@tailwindcss/typography')],
-  
+  plugins: [
+    require("daisyui"),
+    require('@tailwindcss/typography')
+  ],
 }
-
