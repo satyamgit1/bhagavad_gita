@@ -382,20 +382,8 @@ export default function Home() {
                           </h3>
                         </div>
                         <p className="text-gray-600 mt-2 flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 mr-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img width="18" height="18" src="https://img.icons8.com/color/48/menu-2.png" alt="menu-2"/>
                           {chapter.verses_count} Verses
                         </p>
                       </div>
