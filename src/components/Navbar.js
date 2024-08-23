@@ -77,9 +77,10 @@ function Navbar() {
             )}
           </ul>
         </div>
-        <a href="/" onClick={handleLogoClick}>
+        <Link href="/" onClick={handleLogoClick}>
+       
           <Image src="/logo.png" alt="logo" width={64} height={64} />
-        </a>
+        </Link>
       </div>
 
       <div className="navbar-end hidden lg:flex">
