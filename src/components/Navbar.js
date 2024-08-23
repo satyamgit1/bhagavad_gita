@@ -8,12 +8,13 @@ import FullScreenTimer from "@/components/FullScreenTimer"; // Import the FullSc
 function Navbar() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
-  const handleRefresh = () => {
-    window.location.reload();
+  const handleLogoClick = (event) => {
+    event.preventDefault(); // Prevent the default Link behavior
+    window.location.reload(); // Refresh the page
   };
 
   return (
-    <div className="navbar bg-base-200 text-lg font-bold ">
+    <div className="navbar bg-base-200 text-lg font-bold">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -34,8 +35,9 @@ function Navbar() {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
+            {/* Uncomment this line if you want to include the Home Page link */}
             {/* <li>
               <Link href="/">Home Page</Link>
             </li> */}
@@ -77,13 +79,14 @@ function Navbar() {
             )}
           </ul>
         </div>
-        <Link href="/" onClick={handleRefresh}>
+        <Link href="/" passHref onClick={handleLogoClick}>
           <Image src="/logo.png" alt="logo" width={64} height={64} />
         </Link>
       </div>
 
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
+          {/* Uncomment this line if you want to include the Home Page link */}
           {/* <li>
             <Link href="/">Home Page</Link>
           </li> */}
