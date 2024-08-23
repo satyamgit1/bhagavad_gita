@@ -176,8 +176,8 @@ import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { Accordion } from "@/components/Accordion";
 import Head from "next/head";
-import WhatsAppButton from '@/components/WhatsAppButton';
-import SkeletonLoader from '@/components/SkeletonLoader'; // Import the SkeletonLoader component
+import WhatsAppButton from "@/components/WhatsAppButton";
+import SkeletonLoader from "@/components/SkeletonLoader"; // Import the SkeletonLoader component
 
 export default function Home() {
   const [chapters, setChapters] = useState([]);
@@ -260,56 +260,55 @@ export default function Home() {
 
   return (
     <div>
-      
-<Head>
-<title>Explore Bhagavad Gita Chapters, Verses, Translations, and Audio</title>
-<meta
-  name="description"
-  content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
-/>
-<meta
-  name="keywords"
-  content="Bhagavad Gita, chapters, verses, translations, audio, Hindu scripture"
-/>
-<meta name="author" content="Satyam Singh" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
-<meta
-  property="og:description"
-  content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
-/>
-<meta property="og:image" content="/path/to/your-image.jpg" />
-<meta property="og:url" content="https://www.bhagavadgita.site/" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
-<meta
-  name="twitter:description"
-  content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
-/>
-<meta name="twitter:image" content="/path/to/your-image.jpg" />
-<script type="application/ld+json">
-  {JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Website",
-    url: "https://www.bhagavadgita.site/",
-    name: "Explore Bhagavad Gita Chapters, Verses, Translations, and Audio",
-    description:
-      "Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text.",
-    author: {
-      "@type": "Person",
-      name: "Satyam Singh",
-    },
-  })}
-</script>
-<link rel="canonical" href="https://www.bhagavadgita.site/" />
-</Head>
-  
+      <Head>
+        <title>Explore Bhagavad Gita Chapters, Verses, Translations, and Audio</title>
+        <meta
+          name="description"
+          content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
+        />
+        <meta
+          name="keywords"
+          content="Bhagavad Gita, chapters, verses, translations, audio, Hindu scripture"
+        />
+        <meta name="author" content="Satyam Singh" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
+        <meta
+          property="og:description"
+          content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
+        />
+        <meta property="og:image" content="/path/to/your-image.jpg" />
+        <meta property="og:url" content="https://www.bhagavadgita.site/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
+        <meta
+          name="twitter:description"
+          content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
+        />
+        <meta name="twitter:image" content="/path/to/your-image.jpg" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Website",
+            url: "https://www.bhagavadgita.site/",
+            name: "Explore Bhagavad Gita Chapters, Verses, Translations, and Audio",
+            description:
+              "Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text.",
+            author: {
+              "@type": "Person",
+              name: "Satyam Singh",
+            },
+          })}
+        </script>
+        <link rel="canonical" href="https://www.bhagavadgita.site/" />
+      </Head>
+
       <Navbar />
       {!showChapters && <Landing onBeginNewLife={handleBeginNewLife} />}
       {showChapters && (
         <div className="custom-container mx-auto p-4">
           <h1 className="text-2xl font-bold mb-4">Explore Bhagavad Gita Chapters</h1>
-  
+
           {/* Breadcrumbs */}
           <div className="custom-breadcrumbs text-sm mb-4">
             <ul className="flex space-x-2">
@@ -341,7 +340,7 @@ export default function Home() {
               )}
             </ul>
           </div>
-  
+
           {/* Chapter and Verse Cards */}
           {!currentChapter && !currentVerse && (
             <div>
@@ -351,10 +350,7 @@ export default function Home() {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {chapters.map((chapter) => (
-                    <Link
-                      key={chapter.chapter_number}
-                      href={`/?chapter=${chapter.chapter_number}`}
-                    >
+                    <Link key={chapter.chapter_number} href={`/?chapter=${chapter.chapter_number}`}>
                       <div className="p-4 border rounded shadow-sm hover:shadow-md cursor-pointer custom-h-48 flex flex-col justify-between custom-transition-transform custom-transform hover:custom-hover-scale-105">
                         <div>
                           <h3 className="text-lg font-semibold text-orange-600">
@@ -475,7 +471,7 @@ export default function Home() {
                     <h3 className="text-lg font-bold mb-2 text-yellow-600">
                       Listen to the Verse:
                     </h3>
-                    <audio controls src={verseDetails.audio_url}>
+                    <audio controls src="https://www.gitasupersite.iitk.ac.in/sites/default/files/audio/CHAP1/1-2.MP3">
                       Your browser does not support the audio element.
                     </audio>
                   </div>
@@ -492,14 +488,3 @@ export default function Home() {
     </div>
   );
 }
-
-  
-
-
-
-
-
-
-
-
-
