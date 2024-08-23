@@ -166,7 +166,6 @@
 //   );
 // }
 
-
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -213,11 +212,15 @@ export default function Home() {
 
   const fetchChapters = async () => {
     setLoadingChapters(true);
-    const res = await fetch("https://bhagavadgita-api-psi.vercel.app/api/chapters");
+    const res = await fetch(
+      "https://bhagavadgita-api-psi.vercel.app/api/chapters"
+    );
     const data = await res.json();
     const chaptersWithVersesCount = await Promise.all(
       data.chapters.map(async (chapter) => {
-        const verseRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${chapter.chapter_number}`);
+        const verseRes = await fetch(
+          `https://bhagavadgita-api-psi.vercel.app/api/verses/${chapter.chapter_number}`
+        );
         const verseData = await verseRes.json();
         return { ...chapter, verses_count: verseData.verses.length };
       })
@@ -228,7 +231,9 @@ export default function Home() {
 
   const fetchVerses = async (chapterId) => {
     setLoadingVerses(true);
-    const res = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${chapterId}`);
+    const res = await fetch(
+      `https://bhagavadgita-api-psi.vercel.app/api/verses/${chapterId}`
+    );
     const data = await res.json();
     setVerses(data.verses);
     setLoadingVerses(false);
@@ -236,9 +241,12 @@ export default function Home() {
 
   const fetchVerseDetails = async (chapterId, verseId) => {
     setLoadingVerseDetails(true);
-    const res = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verse/${chapterId}.${verseId}`);
+    const res = await fetch(
+      `https://bhagavadgita-api-psi.vercel.app/api/verse/${chapterId}.${verseId}`
+    );
     const data = await res.json();
-    setVerseDetails(data.verseDetails);
+    const audioUrl = `https://www.gitasupersite.iitk.ac.in/sites/default/files/audio/CHAP${chapterId}/${chapterId}-${verseId}.MP3`;
+    setVerseDetails({ ...data.verseDetails, audioUrl });
     setLoadingVerseDetails(false);
   };
 
@@ -261,7 +269,9 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Explore Bhagavad Gita Chapters, Verses, Translations, and Audio</title>
+        <title>
+          Explore Bhagavad Gita Chapters, Verses, Translations, and Audio
+        </title>
         <meta
           name="description"
           content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
@@ -272,7 +282,10 @@ export default function Home() {
         />
         <meta name="author" content="Satyam Singh" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
+        <meta
+          property="og:title"
+          content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio"
+        />
         <meta
           property="og:description"
           content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
@@ -280,7 +293,10 @@ export default function Home() {
         <meta property="og:image" content="/path/to/your-image.jpg" />
         <meta property="og:url" content="https://www.bhagavadgita.site/" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio" />
+        <meta
+          name="twitter:title"
+          content="Explore Bhagavad Gita Chapters, Verses, Translations, and Audio"
+        />
         <meta
           name="twitter:description"
           content="Explore the chapters and verses of the Bhagavad Gita with detailed translations and audio. Discover the profound teachings of this sacred text."
@@ -307,7 +323,9 @@ export default function Home() {
       {!showChapters && <Landing onBeginNewLife={handleBeginNewLife} />}
       {showChapters && (
         <div className="custom-container mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Explore Bhagavad Gita Chapters</h1>
+          <h1 className="text-2xl font-bold mb-4">
+            Explore Bhagavad Gita Chapters
+          </h1>
 
           {/* Breadcrumbs */}
           <div className="custom-breadcrumbs text-sm mb-4">
@@ -350,7 +368,10 @@ export default function Home() {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {chapters.map((chapter) => (
-                    <Link key={chapter.chapter_number} href={`/?chapter=${chapter.chapter_number}`}>
+                    <Link
+                      key={chapter.chapter_number}
+                      href={`/?chapter=${chapter.chapter_number}`}
+                    >
                       <div className="p-4 border rounded shadow-sm hover:shadow-md cursor-pointer custom-h-48 flex flex-col justify-between custom-transition-transform custom-transform hover:custom-hover-scale-105">
                         <div>
                           <h3 className="text-lg font-semibold text-orange-600">
@@ -453,6 +474,14 @@ export default function Home() {
                       {verseDetails.translation}
                     </div>
                   </div>
+                  <div className="verse-details-audio mt-4 grid justify-center items-center">
+                    <h3 className="text-lg font-bold mb-6 text-yellow-600 ">
+                      Listen to the Verse:
+                    </h3>
+                    <audio controls src={verseDetails.audioUrl}>
+                      Your browser does not support the audio element.
+                    </audio>
+                  </div>
                   <div className="verse-details-purport mt-4">
                     <h3 className="text-lg font-bold mb-2 text-yellow-600">
                       Purport:
@@ -466,14 +495,6 @@ export default function Home() {
                     ) : (
                       <p>No purport available.</p>
                     )}
-                  </div>
-                  <div className="verse-details-audio mt-4">
-                    <h3 className="text-lg font-bold mb-2 text-yellow-600">
-                      Listen to the Verse:
-                    </h3>
-                    <audio controls src="https://www.gitasupersite.iitk.ac.in/sites/default/files/audio/CHAP1/1-2.MP3">
-                      Your browser does not support the audio element.
-                    </audio>
                   </div>
                 </div>
               )}
