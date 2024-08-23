@@ -1,11 +1,19 @@
 import React from "react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from 'next/router';  // Import useRouter
 import FullScreenTimer from "@/components/FullScreenTimer"; // Import the FullScreenTimer component
 
-function Navbar({ onLogoClick }) {
+function Navbar() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+  const router = useRouter();  // Initialize the router
+
+  const handleLogoClick = (event) => {
+    event.preventDefault(); // Prevent the default Link behavior
+    router.push('/');  // Navigate to the homepage
+  };
 
   return (
     <div className="navbar bg-base-200 text-lg font-bold">
@@ -69,13 +77,14 @@ function Navbar({ onLogoClick }) {
             )}
           </ul>
         </div>
-        <Link href="/" passHref>
-          <Image src="/logo.png" alt="logo" width={64} height={64} onClick={onLogoClick} />
-        </Link>
+        <a href="/" onClick={handleLogoClick}>
+          <Image src="/logo.png" alt="logo" width={64} height={64} />
+        </a>
       </div>
 
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
+
           <li>
             <Link href="/about_us">About us</Link>
           </li>
