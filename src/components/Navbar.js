@@ -1,17 +1,11 @@
 import React from "react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth0 } from "@auth0/auth0-react";
 import FullScreenTimer from "@/components/FullScreenTimer"; // Import the FullScreenTimer component
 
-function Navbar() {
+function Navbar({ onLogoClick }) {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
-
-  const handleLogoClick = (event) => {
-    event.preventDefault(); // Prevent the default Link behavior
-    window.location.reload(); // Refresh the page
-  };
 
   return (
     <div className="navbar bg-base-200 text-lg font-bold">
@@ -37,10 +31,6 @@ function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {/* Uncomment this line if you want to include the Home Page link */}
-            {/* <li>
-              <Link href="/">Home Page</Link>
-            </li> */}
             <li>
               <Link href="/about_us">About us</Link>
             </li>
@@ -79,17 +69,13 @@ function Navbar() {
             )}
           </ul>
         </div>
-        <Link href="/" passHref onClick={handleLogoClick}>
-          <Image src="/logo.png" alt="logo" width={64} height={64} />
+        <Link href="/" passHref>
+          <Image src="/logo.png" alt="logo" width={64} height={64} onClick={onLogoClick} />
         </Link>
       </div>
 
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
-          {/* Uncomment this line if you want to include the Home Page link */}
-          {/* <li>
-            <Link href="/">Home Page</Link>
-          </li> */}
           <li>
             <Link href="/about_us">About us</Link>
           </li>
