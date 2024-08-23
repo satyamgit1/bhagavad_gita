@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth0 } from "@auth0/auth0-react";
+import FullScreenTimer from "@/components/FullScreenTimer"; // Import the FullScreenTimer component
 
 function Navbar() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
@@ -35,9 +36,9 @@ function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
           >
-           <li>
-            <Link href="/">Home Page</Link>
-          </li>
+            <li>
+              <Link href="/">Home Page</Link>
+            </li>
             <li>
               <Link href="/about_us">About us</Link>
             </li>
@@ -48,22 +49,28 @@ function Navbar() {
               <Link href="/audiobook">Audio Book</Link>
             </li>
             {isAuthenticated && (
-              <li>
-                <p>{user.name}</p>
-              </li>
+              <>
+                <li>
+                  <p>{user.name}</p>
+                </li>
+                <li>
+                  <FullScreenTimer /> {/* Display the FullScreenTimer */}
+                </li>
+                <li>
+                  <button
+                    className="toggle-switch"
+                    onClick={() =>
+                      logout({
+                        logoutParams: { returnTo: window.location.origin },
+                      })
+                    }
+                  >
+                    Log Out
+                  </button>
+                </li>
+              </>
             )}
-            {isAuthenticated ? (
-              <li>
-                <button
-                  className="toggle-switch"
-                  onClick={() =>
-                    logout({ logoutParams: { returnTo: window.location.origin } })
-                  }
-                >
-                  Log Out
-                </button>
-              </li>
-            ) : (
+            {!isAuthenticated && (
               <li>
                 <button onClick={() => loginWithRedirect()}>Log In</button>
               </li>
@@ -71,16 +78,13 @@ function Navbar() {
           </ul>
         </div>
         <Link href="/" onClick={handleRefresh}>
-          
-            <Image src="/logo.png" alt="logo" width={64} height={64} />
-          
+          <Image src="/logo.png" alt="logo" width={64} height={64} />
         </Link>
-        
       </div>
 
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center justify-between">
-        <li>
+          <li>
             <Link href="/">Home Page</Link>
           </li>
           <li>
@@ -93,21 +97,27 @@ function Navbar() {
             <Link href="/audiobook">Audio Book</Link>
           </li>
           {isAuthenticated && (
-            <li>
-              <p>{user.name}</p>
-            </li>
+            <>
+              <li>
+                <p>{user.name}</p>
+              </li>
+              <li>
+                <FullScreenTimer /> {/* Display the FullScreenTimer */}
+              </li>
+              <li>
+                <button
+                  onClick={() =>
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    })
+                  }
+                >
+                  Log Out
+                </button>
+              </li>
+            </>
           )}
-          {isAuthenticated ? (
-            <li>
-              <button
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
-              >
-                Log Out
-              </button>
-            </li>
-          ) : (
+          {!isAuthenticated && (
             <li>
               <button onClick={() => loginWithRedirect()}>Log In</button>
             </li>

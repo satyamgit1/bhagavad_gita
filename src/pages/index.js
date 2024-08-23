@@ -178,6 +178,7 @@ import Head from "next/head";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SkeletonLoader from "@/components/SkeletonLoader"; // Import the SkeletonLoader component
 
+
 export default function Home() {
   const [chapters, setChapters] = useState([]);
   const [verses, setVerses] = useState([]);
