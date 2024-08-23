@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 
 const FullScreenTimer = () => {
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [Read, setRead] = useState(false);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
     let timer;
-    if (isFullScreen) {
+    if (Read) {
       timer = setInterval(() => setTime(prevTime => prevTime + 1), 1000);
     }
     return () => {
       clearInterval(timer);
     };
-  }, [isFullScreen]);
+  }, [Read]);
 
   const toggleFullScreen = () => {
-    if (!isFullScreen) {
+    if (!Read) {
       if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
       } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
@@ -36,15 +36,15 @@ const FullScreenTimer = () => {
         document.msExitFullscreen();
       }
     }
-    setIsFullScreen(!isFullScreen);
+    setRead(!Read);
   };
 
   return (
     <div>
       <button onClick={toggleFullScreen}>
-        {isFullScreen ? 'Exit Full Screen' : 'Enter Full Screen'}
+        {Read ? 'Exit Read' : 'Read'}
       </button>
-      {isFullScreen && <p>Time in full screen: {time} seconds</p>}
+      {Read && <p>Timer: {time} seconds</p>}
     </div>
   );
 };
