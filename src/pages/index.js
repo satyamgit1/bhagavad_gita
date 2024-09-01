@@ -494,10 +494,11 @@ export default function Home() {
           )}
         </div>
       )}
+      <SubscribeForm />
       <WhatsAppButton />
       <Accordion />
       <Newsletter />
-      <SubscribeForm />
+ 
       <Footer />
     </div>
   );
