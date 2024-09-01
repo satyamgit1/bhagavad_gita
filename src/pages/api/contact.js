@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import connectDB from "@/utils/db";
+import connectDB from "@/utils/mongodb";
 import nodemailer from "nodemailer";
 
 connectDB();
