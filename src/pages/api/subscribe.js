@@ -1,4 +1,3 @@
-// subscribe.js
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
 
@@ -35,7 +34,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json({ message: 'Subscribed and email sent successfully!' });
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error('Error during subscription:', error);
       return res.status(500).json({ message: 'Subscription failed.', error: error.message });
     }
   } else {
