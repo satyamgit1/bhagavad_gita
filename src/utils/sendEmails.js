@@ -1,7 +1,6 @@
 // src/utils/sendEmails.js
 import nodemailer from 'nodemailer';
 import clientPromise from './mongodb';
-import cron from 'node-cron';
 
 async function sendDailyEmails() {
   const client = await clientPromise;
@@ -34,10 +33,5 @@ async function sendDailyEmails() {
     });
   });
 }
-
-// Schedule the task to run daily at a specific time (e.g., 9:00 AM)
-cron.schedule('0 9 * * *', () => {
-  sendDailyEmails();
-});
 
 export default sendDailyEmails;
