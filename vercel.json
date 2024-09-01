@@ -9,11 +9,5 @@
   "routes": [
     { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
     { "src": "/sitemap-0.xml", "dest": "/sitemap-0.xml" }
-  ],
-  "cron": [
-    {
-      "path": "/api/send-daily-verse",
-      "schedule": "0 9 * * *"
-    }
   ]
 }
