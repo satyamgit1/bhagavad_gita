@@ -1,4 +1,3 @@
-// src/components/SubscribeForm.js
 import { useState } from 'react';
 
 export default function SubscribeForm() {
@@ -8,7 +7,7 @@ export default function SubscribeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
@@ -20,10 +19,17 @@ export default function SubscribeForm() {
         alert('Subscribed successfully!');
         setEmail('');  // Clear the input field
       } else {
-        const errorData = await res.json();
+        let errorData = {};
+        try {
+          errorData = await res.json();
+        } catch (jsonError) {
+          console.error('Failed to parse JSON:', jsonError);
+          errorData.message = 'Unexpected error occurred';
+        }
         alert(`Subscription failed: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
+      console.error('Subscription error:', error);  // Log the error for debugging
       alert(`Subscription failed: ${error.message}`);
     } finally {
       setLoading(false);

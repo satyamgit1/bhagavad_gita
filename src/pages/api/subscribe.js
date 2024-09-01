@@ -1,3 +1,4 @@
+// subscribe.js
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
 
@@ -24,22 +25,20 @@ export default async function handler(req, res) {
       console.log('Starting to send email...');
       await transporter.sendMail(mailOptions);
       console.log('Email sent successfully.');
-    
+
       const client = await clientPromise;
       const db = client.db('myDatabase');
       const collection = db.collection('subscribers');
-    
+
       await collection.insertOne({ email });
       console.log('Subscription saved to MongoDB.');
-    
+
       return res.status(200).json({ message: 'Subscribed and email sent successfully!' });
     } catch (error) {
-      console.error('Error details:', {
-        message: error.message,
-        stack: error.stack,
-        name: error.name,
-      });
+      console.error('Error:', error.message);
       return res.status(500).json({ message: 'Subscription failed.', error: error.message });
     }
+  } else {
+    res.status(405).json({ message: 'Method not allowed' });
   }
-}    
+}
