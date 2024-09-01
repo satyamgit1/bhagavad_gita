@@ -1,14 +1,19 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "next.config.js",
-        "use": "@vercel/next"
-      }
-    ],
-    "routes": [
-      { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
-      { "src": "/sitemap-0.xml", "dest": "/sitemap-0.xml" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
+    { "src": "/sitemap-0.xml", "dest": "/sitemap-0.xml" }
+  ],
+  "cron": [
+    {
+      "path": "/api/send-daily-verse",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

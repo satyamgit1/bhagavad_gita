@@ -177,6 +177,9 @@ import { Accordion } from "@/components/Accordion";
 import Head from "next/head";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SkeletonLoader from "@/components/SkeletonLoader"; // Import the SkeletonLoader component
+import SubscribeForm from '../components/SubscribeForm';
+
+
 
 
 export default function Home() {
@@ -494,6 +497,7 @@ export default function Home() {
       <WhatsAppButton />
       <Accordion />
       <Newsletter />
+      <SubscribeForm />
       <Footer />
     </div>
   );
