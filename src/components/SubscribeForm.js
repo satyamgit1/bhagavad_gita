@@ -16,8 +16,8 @@ export default function SubscribeForm() {
       });
 
       if (res.ok) {
-        alert('Subscribed successfully!');
         setEmail('');  // Clear the input field
+        document.getElementById('my_modal_5').showModal();  // Show the modal on success
       } else {
         let errorData = {};
         try {
@@ -37,28 +37,85 @@ export default function SubscribeForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-lg space-y-4"
-    >
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-        required
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        disabled={loading}
-      />
-      <button
-        type="submit"
-        className={`w-full text-white py-2 rounded-lg transition-colors ${
-          loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
-        }`}
-        disabled={loading}
+    <>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          backgroundColor: 'white',
+          padding: '24px',
+          borderRadius: '12px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          maxWidth: '400px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+        }}
       >
-        {loading ? 'Subscribing...' : 'Subscribe'}
-      </button>
-    </form>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+          style={{
+            width: '100%',
+            padding: '12px',
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            outline: 'none',
+            transition: 'border-color 0.3s',
+          }}
+          onFocus={(e) => (e.target.style.borderColor = '#007bff')}
+          onBlur={(e) => (e.target.style.borderColor = '#ccc')}
+          disabled={loading}
+        />
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            padding: '12px',
+            borderRadius: '8px',
+            backgroundColor: loading ? '#6c757d' : '#007bff',
+            color: 'white',
+            fontWeight: 'bold',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            transition: 'background-color 0.3s',
+            border: 'none',
+          }}
+          disabled={loading}
+        >
+          {loading ? 'Subscribing...' : 'Subscribe'}
+        </button>
+      </form>
+
+      {/* Modal */}
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box" style={{
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+          maxWidth: '400px',
+          margin: '0 auto',
+          textAlign: 'center',
+        }}>
+          <h3 className="font-bold text-lg" style={{ fontSize: '24px', marginBottom: '16px' }}>Subscription Successful!</h3>
+          <p className="py-4" style={{ marginBottom: '24px', color: '#555' }}>Thank you for subscribing. Check your email for a special message!</p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn" style={{
+                padding: '12px 24px',
+                borderRadius: '8px',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+              }}>Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }
