@@ -1,7 +1,21 @@
 import mongoose from "mongoose";
-import connectDB from "@/utils/mongodb";
+import clientPromise from "@/utils/mongodb";
 import nodemailer from "nodemailer";
 
+async function connectDB() {
+  const client = await clientPromise;
+  const db = client.db();
+
+  if (!mongoose.connection.readyState) {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  }
+  return db;
+}
+
+// Call connectDB at the top of your handler
 connectDB();
 
 // Create a Contact Us schema
@@ -25,6 +39,8 @@ const transporter = nodemailer.createTransport({
 });
 
 export default async function handler(req, res) {
+  await connectDB(); // Ensure the database is connected
+
   switch (req.method) {
     case "GET":
       try {
