@@ -1,3 +1,4 @@
+// src/utils/sendEmails.js
 import nodemailer from 'nodemailer';
 import clientPromise from './mongodb';
 
@@ -6,6 +7,9 @@ async function sendDailyEmails() {
   const db = client.db('myDatabase');
   const collection = db.collection('subscribers');
   const subscribers = await collection.find({}).toArray();
+
+  // Fetch the Shloka of the Day (you can replace this with your own logic)
+  const shloka = await fetchShloka();
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -19,8 +23,8 @@ async function sendDailyEmails() {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: subscriber.email,
-      subject: 'Daily Update',
-      text: 'Hello from Developer Side!',
+      subject: 'Shloka of the Day',
+      text: `Dear ${subscriber.name},\n\nHere is your Shloka of the Day:\n\n${shloka}`,
     };
 
     try {
@@ -32,6 +36,14 @@ async function sendDailyEmails() {
   });
 
   await Promise.all(emailPromises); // Send all emails concurrently
+}
+
+// Fetch Shloka of the day (you can customize this)
+async function fetchShloka() {
+  // Example API call to fetch the Shloka, replace with your API or logic
+  const res = await fetch('https://bhagavadgita-api-psi.vercel.app/api/verse/random');
+  const data = await res.json();
+  return data.sanskrit_shlok || 'Shloka not available';
 }
 
 export default sendDailyEmails;
