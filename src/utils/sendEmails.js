@@ -1,4 +1,3 @@
-// src/utils/sendEmails.js
 import nodemailer from 'nodemailer';
 import clientPromise from './mongodb';
 
@@ -16,7 +15,7 @@ async function sendDailyEmails() {
     },
   });
 
-  subscribers.forEach((subscriber) => {
+  const emailPromises = subscribers.map(async (subscriber) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: subscriber.email,
@@ -24,14 +23,15 @@ async function sendDailyEmails() {
       text: 'Hello from Developer Side!',
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email:', error);
-      } else {
-        console.log('Email sent:', info.response);
-      }
-    });
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('Email sent to:', subscriber.email);
+    } catch (error) {
+      console.error('Error sending email to:', subscriber.email, error);
+    }
   });
+
+  await Promise.all(emailPromises); // Send all emails concurrently
 }
 
 export default sendDailyEmails;
