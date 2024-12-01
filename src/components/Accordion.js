@@ -7,7 +7,7 @@ export const Accordion = () => {
       <section className=" ">
         <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
           <h2 className="text-2xl font-semibold sm:text-4xl text-yellow-700">
-            Explore the Teachings
+            Explore the 
           </h2>
           <p className="mt-4 mb-8 ">
           Let the Bhagavad Gita be your guiding light on the path to self-discovery, inner peace, and spiritual realization.
