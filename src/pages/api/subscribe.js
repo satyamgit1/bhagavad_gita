@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         to: email,
         subject: 'Your Bhagavad Gita Verse of the Day',
         html: `
-          <div style="font-family: Arial, sans-serif; color: orange;">
+          <div style="font-family: Times New Roman, sans-serif; color: orange;">
             <div style="background-color: orange; padding: 20px; text-align: center; border-bottom: 1px solid #006666;">
               <h1 style="color: #ffffff; margin: 0;">Bhagavad Gita</h1>
               <h2 style="color: #ffffff; margin: 5px 0;">Verse of the Day</h2>
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
               </div>
               <p style="margin-top: 40px; font-size: 16px; color: #555;">Reflect on this verse and let it guide you through your day.</p>
               <p style="font-size: 16px; color: #555;">May the teachings of the Bhagavad Gita bring you peace and wisdom.</p>
-              <p style="margin-top: 40px; font-size: 16px; color: #555;">Best regards,<br>The Bhagavad Gita Team</p>
+              <p style="margin-top: 40px; font-size: 16px; color: #555;">Best regards,<br>The Bhagavad Gita Team -> Satyam Singh 😇/p>
             </div>
             <div style="background-color: #f4f4f4; padding: 10px; text-align: center; border-top: 1px solid #ddd;">
               <p style="font-size: 12px; color: #666;">You are receiving this email because you subscribed to the Bhagavad Gita Verse of the Day service.</p>
