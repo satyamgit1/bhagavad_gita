@@ -1,5 +1,3 @@
-
-
 import mongoose from 'mongoose';
 import clientPromise from '@/utils/mongodb';
 import nodemailer from 'nodemailer';
@@ -65,7 +63,7 @@ export default async function handler(req, res) {
         // Send email notification
         const mailOptions = {
           from: process.env.EMAIL_USER,
-          to: process.env.DESTINATION_EMAIL,
+          to: process.env.DESTINATION_EMAIL, // Set the destination email here
           subject: 'New Contact Form Submission',
           html: `
             <style>
@@ -129,14 +127,16 @@ export default async function handler(req, res) {
           `,
         };
 
+        // Send the email using Nodemailer
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
             console.error('Failed to send email:', error.message);
-          } else {
-            console.log('Email sent: ' + info.response);
+            return res.status(500).json({ message: 'Failed to send email' });
           }
+          console.log('Email sent: ' + info.response);
         });
 
+        // Respond with saved contact details
         res.status(201).json(savedContact);
       } catch (error) {
         console.error('Failed to save contact:', error.message);
