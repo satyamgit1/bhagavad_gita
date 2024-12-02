@@ -10,7 +10,6 @@ async function connectDB() {
 
     if (!mongoose.connection.readyState) {
       await mongoose.connect(process.env.MONGODB_URI, {
-        useUnifiedTopology: true,
       });
     }
     return db;
