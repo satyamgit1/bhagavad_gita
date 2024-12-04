@@ -90,6 +90,96 @@
 // }
 
 
+// import { useState } from 'react';
+// import styles from '../styles/subscribe.module.css'; // Assuming this is a CSS Module
+
+// export default function SubscribeForm() {
+//   const [email, setEmail] = useState('');
+//   const [name, setName] = useState('');
+//   const [loading, setLoading] = useState(false);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     try {
+//       const res = await fetch('/api/subscribe', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ name, email }),
+//       });
+
+//       if (res.ok) {
+//         setName('');
+//         setEmail('');
+//         document.getElementById('my_modal_5').showModal();
+//       } else {
+//         let errorData = {};
+//         try {
+//           errorData = await res.json();
+//         } catch (jsonError) {
+//           console.error('Failed to parse JSON:', jsonError);
+//           errorData.message = 'Unexpected error occurred';
+//         }
+//         alert(`Subscription failed: ${errorData.message || 'Unknown error'}`);
+//       }
+//     } catch (error) {
+//       console.error('Subscription error:', error);
+//       alert(`Subscription failed: ${error.message}`);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <div className={styles.subscriptionContainer}>
+//         <h2>Have the Shloka of the Day delivered to your inbox each morning</h2>
+//         <form onSubmit={handleSubmit} className={styles.subscriptionForm}>
+//           <input
+//             type="text"
+//             value={name}
+//             onChange={(e) => setName(e.target.value)}
+//             placeholder="Enter Your Name"
+//             required
+//             className={styles.subscriptionInput}
+//             disabled={loading}
+//           />
+//           <input
+//             type="email"
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             placeholder="Enter Your Email"
+//             required
+//             className={styles.subscriptionInput}
+//             disabled={loading}
+//           />
+//           <button
+//             type="submit"
+//             className={styles.subscriptionButton}
+//             disabled={loading}
+//           >
+//             {loading ? 'Subscribing...' : 'Subscribe'}
+//           </button>
+//         </form>
+//       </div>
+
+//       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+//         <div className="modal-box">
+//           <h3 className="font-bold text-lg">Subscription Successful!</h3>
+//           <p className="py-4">Thank you for subscribing. Check your email for a special message!</p>
+//           <div className="modal-action">
+//             <form method="dialog">
+//               <button className="btn">Close</button>
+//             </form>
+//           </div>
+//         </div>
+//       </dialog>
+//     </>
+//   );
+// }
+
+
 import { useState } from 'react';
 import styles from '../styles/subscribe.module.css'; // Assuming this is a CSS Module
 
@@ -97,6 +187,11 @@ export default function SubscribeForm() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [modalContent, setModalContent] = useState({ type: '', message: '' });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Close the modal
+  const closeModal = () => setIsModalOpen(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,7 +207,7 @@ export default function SubscribeForm() {
       if (res.ok) {
         setName('');
         setEmail('');
-        document.getElementById('my_modal_5').showModal();
+        setModalContent({ type: 'success', message: 'Subscription successful! Check your email for the Shloka of the Day.' });
       } else {
         let errorData = {};
         try {
@@ -121,13 +216,14 @@ export default function SubscribeForm() {
           console.error('Failed to parse JSON:', jsonError);
           errorData.message = 'Unexpected error occurred';
         }
-        alert(`Subscription failed: ${errorData.message || 'Unknown error'}`);
+        setModalContent({ type: 'error', message: `Subscription failed: ${errorData.message || 'Unknown error'}` });
       }
     } catch (error) {
       console.error('Subscription error:', error);
-      alert(`Subscription failed: ${error.message}`);
+      setModalContent({ type: 'error', message: `Subscription failed: ${error.message}` });
     } finally {
       setLoading(false);
+      setIsModalOpen(true);  // Open the modal
     }
   };
 
@@ -164,17 +260,20 @@ export default function SubscribeForm() {
         </form>
       </div>
 
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Subscription Successful!</h3>
-          <p className="py-4">Thank you for subscribing. Check your email for a special message!</p>
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
+      {/* Modal to show success or error message */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3 className={`font-bold text-lg ${modalContent.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
+              {modalContent.type === 'error' ? 'Error' : 'Success'}
+            </h3>
+            <p className="py-4">{modalContent.message}</p>
+            <div className="modal-action">
+              <button className="btn" onClick={closeModal}>Close</button>
+            </div>
           </div>
         </div>
-      </dialog>
+      )}
     </>
   );
 }
