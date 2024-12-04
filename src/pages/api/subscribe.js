@@ -6,6 +6,19 @@ export default async function handler(req, res) {
     const { name, email } = req.body;  // Extract the name and email from the request body
 
     try {
+      // Connect to the database
+      const client = await clientPromise;
+      const db = client.db('myDatabase');
+      const collection = db.collection('subscribers');
+
+      // Check if the email is already subscribed
+      const existingSubscriber = await collection.findOne({ email });
+      if (existingSubscriber) {
+        return res.status(400).json({
+          message: 'You are already subscribed to the Bhagavad Gita Verse of the Day.',
+        });
+      }
+
       // Fetch all chapters
       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
       const chaptersData = await chaptersRes.json();
@@ -34,18 +47,6 @@ export default async function handler(req, res) {
           pass: process.env.EMAIL_PASS,
         },
       });
-
-      // Check if the user is already subscribed
-      const client = await clientPromise;
-      const db = client.db('myDatabase');
-      const collection = db.collection('subscribers');
-
-      const existingSubscriber = await collection.findOne({ email });
-
-      if (existingSubscriber) {
-        // If the user is already subscribed, return an error
-        return res.status(400).json({ message: 'You have already subscribed with this email address.' });
-      }
 
       // Email content
       const mailOptions = {

@@ -1,6 +1,6 @@
 // Modal.js
 import React from 'react';
-import '../styles/Modal.css';  // Optional: You can add your custom styles for the modal
+// Optional: You can add your custom styles for the modal
 
 const Modal = ({ isOpen, message, onClose }) => {
   if (!isOpen) return null; // Don't render if the modal isn't open

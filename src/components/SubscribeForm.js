@@ -187,15 +187,12 @@ export default function SubscribeForm() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
-  const [modalContent, setModalContent] = useState({ type: '', message: '' });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Close the modal
-  const closeModal = () => setIsModalOpen(false);
+  const [errorMessage, setErrorMessage] = useState(null);  // To store the error message
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage(null);  // Reset any previous error messages
 
     try {
       const res = await fetch('/api/subscribe', {
@@ -207,7 +204,7 @@ export default function SubscribeForm() {
       if (res.ok) {
         setName('');
         setEmail('');
-        setModalContent({ type: 'success', message: 'Subscription successful! Check your email for the Shloka of the Day.' });
+        document.getElementById('my_modal_5').showModal();  // Show success modal
       } else {
         let errorData = {};
         try {
@@ -216,14 +213,20 @@ export default function SubscribeForm() {
           console.error('Failed to parse JSON:', jsonError);
           errorData.message = 'Unexpected error occurred';
         }
-        setModalContent({ type: 'error', message: `Subscription failed: ${errorData.message || 'Unknown error'}` });
+
+        // If the error message indicates already subscribed
+        if (errorData.message === 'You are already subscribed to the Bhagavad Gita Verse of the Day.') {
+          setErrorMessage(errorData.message);  // Set the error message
+          document.getElementById('my_modal_6').showModal();  // Show the error modal
+        } else {
+          alert(`Subscription failed: ${errorData.message || 'Unknown error'}`);
+        }
       }
     } catch (error) {
       console.error('Subscription error:', error);
-      setModalContent({ type: 'error', message: `Subscription failed: ${error.message}` });
+      alert(`Subscription failed: ${error.message}`);
     } finally {
       setLoading(false);
-      setIsModalOpen(true);  // Open the modal
     }
   };
 
@@ -260,20 +263,31 @@ export default function SubscribeForm() {
         </form>
       </div>
 
-      {/* Modal to show success or error message */}
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <h3 className={`font-bold text-lg ${modalContent.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
-              {modalContent.type === 'error' ? 'Error' : 'Success'}
-            </h3>
-            <p className="py-4">{modalContent.message}</p>
-            <div className="modal-action">
-              <button className="btn" onClick={closeModal}>Close</button>
-            </div>
+      {/* Success Modal */}
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Subscription Successful!</h3>
+          <p className="py-4">Thank you for subscribing. Check your email for a special message!</p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Close</button>
+            </form>
           </div>
         </div>
-      )}
+      </dialog>
+
+      {/* Error Modal */}
+      <dialog id="my_modal_6" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Subscription Failed</h3>
+          <p className="py-4">{errorMessage || 'An unknown error occurred. Please try again later.'}</p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </>
   );
 }
