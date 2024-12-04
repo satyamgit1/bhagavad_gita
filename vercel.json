@@ -11,9 +11,10 @@
     { "src": "/sitemap-0.xml", "dest": "/sitemap-0.xml" }
   ],
   "crons": [
-    {
-      "path": "/api/cron",
-      "schedule": "* * * * *"  
-    }
-  ]
+  {
+    "path": "/api/cron",
+    "schedule": "0 10 * * *"
+  }
+]
+
 }

@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, email } = req.body;  // Extract the name from the request body
+    const { name, email } = req.body;  // Extract the name and email from the request body
 
     try {
       // Fetch all chapters
@@ -34,6 +34,18 @@ export default async function handler(req, res) {
           pass: process.env.EMAIL_PASS,
         },
       });
+
+      // Check if the user is already subscribed
+      const client = await clientPromise;
+      const db = client.db('myDatabase');
+      const collection = db.collection('subscribers');
+
+      const existingSubscriber = await collection.findOne({ email });
+
+      if (existingSubscriber) {
+        // If the user is already subscribed, return an error
+        return res.status(400).json({ message: 'You have already subscribed with this email address.' });
+      }
 
       // Email content
       const mailOptions = {
@@ -75,10 +87,6 @@ export default async function handler(req, res) {
       console.log('Email sent successfully.');
 
       // Save the subscription to MongoDB
-      const client = await clientPromise;
-      const db = client.db('myDatabase');
-      const collection = db.collection('subscribers');
-
       await collection.insertOne({ name, email });  // Save the name and email
       console.log('Subscription saved to MongoDB.');
 
