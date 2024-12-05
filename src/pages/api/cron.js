@@ -1,14 +1,25 @@
+
+
+
 // import clientPromise from '../../utils/mongodb';
 // import nodemailer from 'nodemailer';
 
 // export default async function handler(req, res) {
 //   if (req.method === 'GET') {
 //     try {
+//       console.log('Starting cron job to send daily verse emails...');
+      
 //       // Fetch all subscribers from MongoDB
 //       const client = await clientPromise;
 //       const db = client.db('myDatabase');
 //       const collection = db.collection('subscribers');
 //       const subscribers = await collection.find({}).toArray();
+
+//       if (subscribers.length === 0) {
+//         console.log('No subscribers found.');
+//       } else {
+//         console.log(`Found ${subscribers.length} subscribers.`);
+//       }
 
 //       // Fetch the verse of the day (same logic as in subscribe.js)
 //       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
@@ -74,9 +85,13 @@
 //           `,
 //         };
 
-//         // Send the email
-//         await transporter.sendMail(mailOptions);
-//         console.log(`Email sent to ${email}`);
+//         // Send the email and log any errors
+//         try {
+//           await transporter.sendMail(mailOptions);
+//           console.log(`Email sent to ${email}`);
+//         } catch (error) {
+//           console.error(`Failed to send email to ${email}:`, error.message);
+//         }
 //       }
 
 //       // Respond to the client
@@ -107,11 +122,12 @@ export default async function handler(req, res) {
 
       if (subscribers.length === 0) {
         console.log('No subscribers found.');
+        return res.status(200).json({ message: 'No subscribers to send email.' });
       } else {
         console.log(`Found ${subscribers.length} subscribers.`);
       }
 
-      // Fetch the verse of the day (same logic as in subscribe.js)
+      // Fetch the verse of the day
       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
       const chaptersData = await chaptersRes.json();
       const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
@@ -137,8 +153,8 @@ export default async function handler(req, res) {
         },
       });
 
-      // Loop over all subscribers and send the verse email
-      for (const subscriber of subscribers) {
+      // Create an array of email sending promises for all subscribers
+      const emailPromises = subscribers.map((subscriber) => {
         const { name, email } = subscriber;
 
         const mailOptions = {
@@ -168,29 +184,25 @@ export default async function handler(req, res) {
                 <p style="margin-top: 40px; font-size: 16px; color: #555;">Best regards,<br>The Bhagavad Gita Team</p>
               </div>
               <div style="background-color: #f4f4f4; padding: 10px; text-align: center; border-top: 1px solid #ddd;">
-                <p style="font-size: 12px; color: #666;">You are receiving this email because you subscribed to the Bhagavad Gita Verse of the Day service.</p>
-                <p style="font-size: 12px; color: #666;">To unsubscribe, please click here.</p>
+                <p style="font-size: 12px; color: #666;">You are receiving this email because you subscribed to the Bhagavad Gita verse of the day.</p>
               </div>
             </div>
           `,
         };
 
-        // Send the email and log any errors
-        try {
-          await transporter.sendMail(mailOptions);
-          console.log(`Email sent to ${email}`);
-        } catch (error) {
-          console.error(`Failed to send email to ${email}:`, error.message);
-        }
-      }
+        return transporter.sendMail(mailOptions);
+      });
 
-      // Respond to the client
-      res.status(200).json({ message: 'Daily verse emails sent to all subscribers.' });
+      // Wait for all email sending promises to finish
+      await Promise.all(emailPromises);
+      console.log('All emails have been sent successfully.');
+      
+      res.status(200).json({ message: 'Emails sent successfully' });
     } catch (error) {
-      console.error('Error sending daily verse emails:', error);
-      res.status(500).json({ message: 'Failed to send daily verse emails.', error: error.message });
+      console.error('Error sending emails:', error);
+      res.status(500).json({ message: 'Error sending emails' });
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
