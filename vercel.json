@@ -2,15 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "pages/api/cron.js",
-      "use": "@vercel/node"
+      "src": "next.config.js",
+      "use": "@vercel/next"
     }
   ],
   "routes": [
-    {
-      "src": "/api/cron",
-      "methods": ["GET"],
-      "dest": "/api/cron.js"
-    }
-  ]
+    { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
+    { "src": "/sitemap-0.xml", "dest": "/sitemap-0.xml" }
+  ],
+  "crons": [
+  {
+    "path": "/api/cron",
+    "schedule": "0 10 * * *"
+  }
+]
+
 }
