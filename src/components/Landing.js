@@ -148,7 +148,7 @@ export default function Landing({ onBeginNewLife }) {
 
             <Fade direction="up" delay={800} cascade damping={0.1} triggerOnce={true}>
               <p className="text-white text-lg font-medium opacity-80 animate__animated animate__fadeIn animate__delay-1s">
-                "The mind acts like an enemy for those who do not control it."
+                &quot;The mind acts like an enemy for those who do not control it.&quot;
                 <br />— Lord Krishna
               </p>
             </Fade>
