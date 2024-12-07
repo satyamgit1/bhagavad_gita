@@ -194,7 +194,7 @@ async function sendVerseEmails() {
 }
 
 // Schedule the cron job to run every minute
-cron.schedule('0 7 * * *', () => {
+cron.schedule('* * * * *', () => {
   sendVerseEmails();
 });
 

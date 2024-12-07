@@ -101,7 +101,7 @@ async function sendVerseEmails() {
 }
 
 // Schedule the cron job to run every minute
-cron.schedule('0 7 * * *', () => {
+cron.schedule('* * * * *', () => {   //0 7 * * * means at 7:00 AM every day
   sendVerseEmails();
 });
 
