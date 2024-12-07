@@ -111,7 +111,7 @@ export default async function handler(req, res) {
         console.log(`Found ${subscribers.length} subscribers.`);
       }
 
-      // Fetch the verse of the day (same logic as in subscribe.js)
+      // Fetch the verse of the day
       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
       const chaptersData = await chaptersRes.json();
       const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
@@ -137,8 +137,8 @@ export default async function handler(req, res) {
         },
       });
 
-      // Loop over all subscribers and send the verse email
-      for (const subscriber of subscribers) {
+      // Send emails concurrently using Promise.all()
+      const emailPromises = subscribers.map((subscriber) => {
         const { name, email } = subscriber;
 
         const mailOptions = {
@@ -175,14 +175,17 @@ export default async function handler(req, res) {
           `,
         };
 
-        // Send the email and log any errors
-        try {
-          await transporter.sendMail(mailOptions);
-          console.log(`Email sent to ${email}`);
-        } catch (error) {
-          console.error(`Failed to send email to ${email}:`, error.message);
-        }
-      }
+        return transporter.sendMail(mailOptions)
+          .then(() => {
+            console.log(`Email sent to ${email}`);
+          })
+          .catch((error) => {
+            console.error(`Failed to send email to ${email}:`, error.message);
+          });
+      });
+
+      // Wait for all email promises to resolve
+      await Promise.all(emailPromises);
 
       // Respond to the client
       res.status(200).json({ message: 'Daily verse emails sent to all subscribers.' });
