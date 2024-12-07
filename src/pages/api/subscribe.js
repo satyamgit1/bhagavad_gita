@@ -1,54 +1,53 @@
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
+import cron from 'node-cron';
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { name, email } = req.body;  // Extract the name and email from the request body
+async function sendVerseEmails() {
+  try {
+    console.log('Starting cron job to send Bhagavad Gita verse emails...');
+    
+    // Fetch all subscribers from MongoDB
+    const client = await clientPromise;
+    const db = client.db('myDatabase');
+    const collection = db.collection('subscribers');
+    const subscribers = await collection.find({}).toArray();
 
-    try {
-      // Connect to the database
-      const client = await clientPromise;
-      const db = client.db('myDatabase');
-      const collection = db.collection('subscribers');
+    if (subscribers.length === 0) {
+      console.log('No subscribers found.');
+    } else {
+      console.log(`Found ${subscribers.length} subscribers.`);
+    }
 
-      // Check if the email is already subscribed
-      const existingSubscriber = await collection.findOne({ email });
-      if (existingSubscriber) {
-        return res.status(400).json({
-          message: 'You are already subscribed to the Bhagavad Gita Verse of the Day.',
-        });
-      }
+    // Fetch the verse of the day
+    const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
+    const chaptersData = await chaptersRes.json();
+    const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
 
-      // Fetch all chapters
-      const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
-      const chaptersData = await chaptersRes.json();
-      const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
+    const versesRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${randomChapter.chapter_number}`);
+    const versesData = await versesRes.json();
+    const randomVerse = versesData.verses[Math.floor(Math.random() * versesData.verses.length)];
 
-      // Fetch verses for the selected chapter
-      const versesRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${randomChapter.chapter_number}`);
-      const versesData = await versesRes.json();
-      const randomVerse = versesData.verses[Math.floor(Math.random() * versesData.verses.length)];
+    const verseDetailsRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verse/${randomChapter.chapter_number}.${randomVerse.verse_number}`);
+    const verseDetailsData = await verseDetailsRes.json();
+    const verseDetails = verseDetailsData.verseDetails;
 
-      // Fetch detailed information for the selected verse
-      const verseDetailsRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verse/${randomChapter.chapter_number}.${randomVerse.verse_number}`);
-      const verseDetailsData = await verseDetailsRes.json();
+    const sanskrit = verseDetails.sanskrit_shlok || "Sanskrit text not available";
+    const transliteration = verseDetails.english_shlok || "Transliteration not available";
+    const translation = verseDetails.translation || "Translation not available";
 
-      const verseDetails = verseDetailsData.verseDetails;
+    // Configure the email transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-      const sanskrit = verseDetails.sanskrit_shlok || "Sanskrit text not available";
-      const transliteration = verseDetails.english_shlok || "Transliteration not available";
-      const translation = verseDetails.translation || "Translation not available";
+    // Send emails concurrently using Promise.all()
+    const emailPromises = subscribers.map((subscriber) => {
+      const { name, email } = subscriber;
 
-      // Configure the email transporter
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
-      // Email content
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: email,
@@ -60,7 +59,7 @@ export default async function handler(req, res) {
               <h2 style="color: #ffffff; margin: 5px 0;">Verse of the Day</h2>
             </div>
             <div style="padding: 20px;">
-              <p style="font-size: 18px; color: #555;">Dear ${name},</p> <!-- Personalized greeting -->
+              <p style="font-size: 18px; color: #555;">Dear ${name},</p>
               <p style="font-size: 16px;">We are pleased to share with you the verse of the day from the Bhagavad Gita:</p>
               <div style="border-left: 4px solid #008080; padding-left: 16px; margin: 20px 0;">
                 <h3 style="color: #8B0000; margin: 0;">Chapter ${randomChapter.chapter_number}, Verse ${randomVerse.verse_number}</h3>
@@ -83,16 +82,53 @@ export default async function handler(req, res) {
         `,
       };
 
-      // Send the email
-      await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully.');
+      return transporter.sendMail(mailOptions)
+        .then(() => {
+          console.log(`Email sent to ${email}`);
+        })
+        .catch((error) => {
+          console.error(`Failed to send email to ${email}:`, error.message);
+        });
+    });
+
+    // Wait for all email promises to resolve
+    await Promise.all(emailPromises);
+
+    console.log('All emails have been sent.');
+  } catch (error) {
+    console.error('Error sending Bhagavad Gita verse emails:', error);
+  }
+}
+
+// Schedule the cron job to run every minute
+cron.schedule('0 7 * * *', () => {
+  sendVerseEmails();
+});
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { name, email } = req.body;  // Extract the name and email from the request body
+
+    try {
+      // Connect to the database
+      const client = await clientPromise;
+      const db = client.db('myDatabase');
+      const collection = db.collection('subscribers');
+
+      // Check if the email is already subscribed
+      const existingSubscriber = await collection.findOne({ email });
+      if (existingSubscriber) {
+        return res.status(400).json({
+          message: 'You are already subscribed to the Bhagavad Gita Verse of the Day.',
+        });
+      }
 
       // Save the subscription to MongoDB
       await collection.insertOne({ name, email });  // Save the name and email
       console.log('Subscription saved to MongoDB.');
 
       // Respond to the client
-      return res.status(200).json({ message: 'Subscribed and email sent successfully!' });
+      return res.status(200).json({ message: 'Subscribed successfully!' });
     } catch (error) {
       console.error('Error during subscription:', error);
       return res.status(500).json({ message: 'Subscription failed.', error: error.message });

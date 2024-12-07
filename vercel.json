@@ -9,11 +9,5 @@
   "routes": [
     { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
     { "src": "/sitemap-0.xml", "dest": "/sitemap-0.xml" }
-  ],
-  "crons": [
-    {
-      "path": "/api/cron",
-      "schedule": "30 3 * * *" 
-    }
   ]
 }
