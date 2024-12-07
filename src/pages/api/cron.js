@@ -90,7 +90,6 @@
 //   }
 // }
 
-
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
 
@@ -137,8 +136,8 @@ export default async function handler(req, res) {
         },
       });
 
-      // Loop over all subscribers and send the verse email
-      for (const subscriber of subscribers) {
+      // Create an array of promises for sending emails
+      const emailPromises = subscribers.map(async (subscriber) => {
         const { name, email } = subscriber;
 
         const mailOptions = {
@@ -175,14 +174,17 @@ export default async function handler(req, res) {
           `,
         };
 
-        // Send the email and log any errors
+        // Send the email and handle errors
         try {
           await transporter.sendMail(mailOptions);
           console.log(`Email sent to ${email}`);
         } catch (error) {
           console.error(`Failed to send email to ${email}:`, error.message);
         }
-      }
+      });
+
+      // Wait for all emails to be sent
+      await Promise.all(emailPromises);
 
       // Respond to the client
       res.status(200).json({ message: 'Daily verse emails sent to all subscribers.' });
