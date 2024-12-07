@@ -118,11 +118,11 @@
 // }
 
 
+// api/subscribe.js
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
 
-// Function to send the email
-async function sendVerseEmails() {
+export async function sendVerseEmails() {
   try {
     console.log('Starting to send Bhagavad Gita verse emails...');
 
@@ -220,4 +220,35 @@ async function sendVerseEmails() {
   }
 }
 
-// Removed cron job code since Vercel will handle it
+// API route for subscriptions (POST only)
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { name, email } = req.body;
+
+    try {
+      // Connect to the database
+      const client = await clientPromise;
+      const db = client.db('myDatabase');
+      const collection = db.collection('subscribers');
+
+      // Check if the email is already subscribed
+      const existingSubscriber = await collection.findOne({ email });
+      if (existingSubscriber) {
+        return res.status(400).json({
+          message: 'You are already subscribed to the Bhagavad Gita Verse of the Day.',
+        });
+      }
+
+      // Save the subscription to MongoDB
+      await collection.insertOne({ name, email });
+      console.log('Subscription saved to MongoDB.');
+
+      return res.status(200).json({ message: 'Subscribed successfully!' });
+    } catch (error) {
+      console.error('Error during subscription:', error);
+      return res.status(500).json({ message: 'Subscription failed.', error: error.message });
+    }
+  } else {
+    res.status(405).json({ message: 'Method not allowed' });
+  }
+}
