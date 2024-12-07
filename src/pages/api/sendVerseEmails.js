@@ -1,5 +1,5 @@
 // pages/api/sendVerseEmails.js
-import { sendVerseEmails } from '../../utils/sendVerseEmails'; // Assuming the email function is in utils
+import { sendVerseEmails } from '../../utils/sendVerseEmails';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
