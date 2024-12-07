@@ -1,3 +1,5 @@
+// pages/api/subscribe.js
+
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
 
@@ -19,25 +21,22 @@ export default async function handler(req, res) {
         });
       }
 
-      // Fetch all chapters
+      // Fetch the verse of the day (same logic as in cron.js)
       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
       const chaptersData = await chaptersRes.json();
       const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
 
-      // Fetch verses for the selected chapter
       const versesRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verses/${randomChapter.chapter_number}`);
       const versesData = await versesRes.json();
       const randomVerse = versesData.verses[Math.floor(Math.random() * versesData.verses.length)];
 
-      // Fetch detailed information for the selected verse
       const verseDetailsRes = await fetch(`https://bhagavadgita-api-psi.vercel.app/api/verse/${randomChapter.chapter_number}.${randomVerse.verse_number}`);
       const verseDetailsData = await verseDetailsRes.json();
-
       const verseDetails = verseDetailsData.verseDetails;
 
-      const sanskrit = verseDetails.sanskrit_shlok || "Sanskrit text not available";
-      const transliteration = verseDetails.english_shlok || "Transliteration not available";
-      const translation = verseDetails.translation || "Translation not available";
+      const sanskrit = verseDetails.sanskrit_shlok || 'Sanskrit text not available';
+      const transliteration = verseDetails.english_shlok || 'Transliteration not available';
+      const translation = verseDetails.translation || 'Translation not available';
 
       // Configure the email transporter
       const transporter = nodemailer.createTransport({
@@ -60,7 +59,7 @@ export default async function handler(req, res) {
               <h2 style="color: #ffffff; margin: 5px 0;">Verse of the Day</h2>
             </div>
             <div style="padding: 20px;">
-              <p style="font-size: 18px; color: #555;">Dear ${name},</p> <!-- Personalized greeting -->
+              <p style="font-size: 18px; color: #555;">Dear ${name},</p>
               <p style="font-size: 16px;">We are pleased to share with you the verse of the day from the Bhagavad Gita:</p>
               <div style="border-left: 4px solid #008080; padding-left: 16px; margin: 20px 0;">
                 <h3 style="color: #8B0000; margin: 0;">Chapter ${randomChapter.chapter_number}, Verse ${randomVerse.verse_number}</h3>
@@ -73,7 +72,7 @@ export default async function handler(req, res) {
               </div>
               <p style="margin-top: 40px; font-size: 16px; color: #555;">Reflect on this verse and let it guide you through your day.</p>
               <p style="font-size: 16px; color: #555;">May the teachings of the Bhagavad Gita bring you peace and wisdom.</p>
-              <p style="margin-top: 40px; font-size: 16px; color: #555;">Best regards,<br>The Bhagavad Gita Team - Satyam Singh 😇</p>
+              <p style="margin-top: 40px; font-size: 16px; color: #555;">Best regards,<br>The Bhagavad Gita Team</p>
             </div>
             <div style="background-color: #f4f4f4; padding: 10px; text-align: center; border-top: 1px solid #ddd;">
               <p style="font-size: 12px; color: #666;">You are receiving this email because you subscribed to the Bhagavad Gita Verse of the Day service.</p>
@@ -85,19 +84,17 @@ export default async function handler(req, res) {
 
       // Send the email
       await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully.');
 
       // Save the subscription to MongoDB
-      await collection.insertOne({ name, email });  // Save the name and email
-      console.log('Subscription saved to MongoDB.');
+      await collection.insertOne({ name, email });
 
       // Respond to the client
-      return res.status(200).json({ message: 'Subscribed and email sent successfully!' });
+      return res.status(200).json({ message: 'Successfully subscribed!' });
     } catch (error) {
       console.error('Error during subscription:', error);
-      return res.status(500).json({ message: 'Subscription failed.', error: error.message });
+      return res.status(500).json({ message: 'Subscription failed', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    res.status(405).json({ message: 'Method Not Allowed' });
   }
 }

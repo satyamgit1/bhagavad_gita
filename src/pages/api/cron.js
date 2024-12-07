@@ -91,6 +91,8 @@
 // }
 
 
+// pages/api/cron.js
+
 import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
 
@@ -107,11 +109,12 @@ export default async function handler(req, res) {
 
       if (subscribers.length === 0) {
         console.log('No subscribers found.');
+        return res.status(200).json({ message: 'No subscribers found.' });
       } else {
         console.log(`Found ${subscribers.length} subscribers.`);
       }
 
-      // Fetch the verse of the day (same logic as in subscribe.js)
+      // Fetch the verse of the day once for all subscribers
       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
       const chaptersData = await chaptersRes.json();
       const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
@@ -124,9 +127,9 @@ export default async function handler(req, res) {
       const verseDetailsData = await verseDetailsRes.json();
       const verseDetails = verseDetailsData.verseDetails;
 
-      const sanskrit = verseDetails.sanskrit_shlok || "Sanskrit text not available";
-      const transliteration = verseDetails.english_shlok || "Transliteration not available";
-      const translation = verseDetails.translation || "Translation not available";
+      const sanskrit = verseDetails.sanskrit_shlok || 'Sanskrit text not available';
+      const transliteration = verseDetails.english_shlok || 'Transliteration not available';
+      const translation = verseDetails.translation || 'Translation not available';
 
       // Configure the email transporter
       const transporter = nodemailer.createTransport({
@@ -137,8 +140,8 @@ export default async function handler(req, res) {
         },
       });
 
-      // Loop over all subscribers and send the verse email
-      for (const subscriber of subscribers) {
+      // Send email to all subscribers concurrently
+      const emailPromises = subscribers.map((subscriber) => {
         const { name, email } = subscriber;
 
         const mailOptions = {
@@ -175,22 +178,19 @@ export default async function handler(req, res) {
           `,
         };
 
-        // Send the email and log any errors
-        try {
-          await transporter.sendMail(mailOptions);
-          console.log(`Email sent to ${email}`);
-        } catch (error) {
-          console.error(`Failed to send email to ${email}:`, error.message);
-        }
-      }
+        return transporter.sendMail(mailOptions);
+      });
 
-      // Respond to the client
-      res.status(200).json({ message: 'Daily verse emails sent to all subscribers.' });
+      // Wait for all emails to be sent
+      await Promise.all(emailPromises);
+
+      console.log('Daily verse emails sent to all subscribers.');
+      return res.status(200).json({ message: 'Emails sent successfully.' });
     } catch (error) {
-      console.error('Error sending daily verse emails:', error);
-      res.status(500).json({ message: 'Failed to send daily verse emails.', error: error.message });
+      console.error('Error sending daily emails:', error);
+      return res.status(500).json({ message: 'Failed to send emails', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
