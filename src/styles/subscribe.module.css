@@ -1,4 +1,4 @@
-/* subscribe.module.css
+/* subscribe.module.css */
 .subscriptionContainer {
   background-color: #ffe6cc;
   padding: 40px 20px;
@@ -50,77 +50,4 @@
 
 .subscriptionButton:hover {
   background-color: #e56700;
-} */
-
-
-/* subscribe.module.css */
-.subscriptionContainer {
-  background-color: #ffe6cc;
-  padding: 40px 20px;
-  text-align: center;
-  border-radius: 8px;
-  max-width: 1438px;
-  margin: 0 auto;
-}
-
-.subscriptionContainer h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.subscriptionForm {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-  flex-wrap: wrap;  /* Ensure the form items can wrap in smaller screens */
-}
-
-.subscriptionInput {
-  padding: 12px 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  width: 100%;  /* Allow inputs to take full width */
-  max-width: 250px;
-  outline: none;
-}
-
-.subscriptionInput:focus {
-  border-color: #ff7f11;
-}
-
-.subscriptionButton {
-  padding: 12px 24px;
-  border-radius: 4px;
-  background-color: #ff7f11;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.subscriptionButton:hover {
-  background-color: #e56700;
-}
-
-/* Media Query for Small Devices */
-@media (max-width: 600px) {
-  /* Make the form stack vertically */
-  .subscriptionForm {
-    flex-direction: column;  /* Stack vertically */
-    gap: 10px;  /* Reduce gap between form elements */
-  }
-
-  .subscriptionInput {
-    max-width: 90%;  /* Make inputs take 90% of screen width */
-  }
-
-  .subscriptionButton {
-    max-width: 90%;  /* Make button 90% of screen width */
-  }
 }
