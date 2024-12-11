@@ -12,8 +12,12 @@
   ],
   "crons": [
     {
-      "path": "/api/cron",
-      "schedule": "15 0 * * *"  
+      "path": "/api/cron",  // Path to the cron job API route
+      "schedule": "15 0 * * *"  // Cron schedule for daily emails at 00:15 UTC
     }
-  ]
+  ],
+  "env": {
+    "SENDGRID_API_KEY": "@sendgrid_api_key",  
+    "EMAIL_USER": "@email_user"  
+  }
 }
