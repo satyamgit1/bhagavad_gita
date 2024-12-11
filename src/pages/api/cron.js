@@ -196,40 +196,15 @@
 // }
 
 
+import clientPromise from '../../utils/mongodb';
 import nodemailer from 'nodemailer';
-
-const sendEmailWithRetry = async (mailOptions, retries = 3, delay = 10000) => {
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    try {
-      await transporter.sendMail(mailOptions);
-      console.log(`Email sent successfully to ${mailOptions.to}`);
-      return true; // Success
-    } catch (error) {
-      console.error(`Attempt ${attempt} failed for ${mailOptions.to}:`, error.message);
-      if (attempt < retries) {
-        console.log(`Retrying in ${delay / 1000} seconds...`);
-        await new Promise(resolve => setTimeout(resolve, delay)); // wait for 10 seconds before retrying
-      } else {
-        console.error('Max retry attempts reached. Failed to send email.');
-        return false; // Failed after retries
-      }
-    }
-  }
-};
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       console.log('Starting cron job to send daily verse emails...');
-
+      
+      // Fetch all subscribers from MongoDB
       const client = await clientPromise;
       const db = client.db('myDatabase');
       const collection = db.collection('subscribers');
@@ -242,6 +217,7 @@ export default async function handler(req, res) {
         console.log(`Found ${subscribers.length} subscribers.`);
       }
 
+      // Fetch the verse of the day once for all subscribers
       const chaptersRes = await fetch('https://bhagavadgita-api-psi.vercel.app/api/chapters');
       const chaptersData = await chaptersRes.json();
       const randomChapter = chaptersData.chapters[Math.floor(Math.random() * chaptersData.chapters.length)];
@@ -258,7 +234,15 @@ export default async function handler(req, res) {
       const transliteration = verseDetails.english_shlok || 'Transliteration not available';
       const translation = verseDetails.translation || 'Translation not available';
 
-      // Send email to all subscribers concurrently with retry logic
+      // Send email to all subscribers concurrently
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
       const emailPromises = subscribers.map((subscriber) => {
         const { name, email } = subscriber;
 
@@ -296,11 +280,10 @@ export default async function handler(req, res) {
           `,
         };
 
-        return sendEmailWithRetry(mailOptions); // Retry logic
+        return transporter.sendMail(mailOptions);
       });
 
-      // Wait for all email attempts (with retries) to complete
-      const results = await Promise.all(emailPromises);
+      await Promise.all(emailPromises);
 
       console.log('Daily verse emails sent to all subscribers.');
       return res.status(200).json({ message: 'Emails sent successfully.' });
